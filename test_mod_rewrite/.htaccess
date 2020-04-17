@@ -1,0 +1,5 @@
+# Habilitar mod_rewrite
+RewriteEngine on
+
+# Convierte el primer parámetro y segundo en clientes.php?id="segundoparametro"
+RewriteRule ^(\w+)/(\w+)/?$ clientes.php?id=$2
