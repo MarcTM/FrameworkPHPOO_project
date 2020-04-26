@@ -1,0 +1,119 @@
+/////////////////
+////SHOW PRODUCT DETAILS
+///////////////
+function show_details(){
+    var id = localStorage.getItem('infoprod');
+
+    $.ajax({
+        type: "GET",
+        dataType: "JSON",
+        url: "module/details/controller/controller_details.php?op=show_details&id=" + id,
+    })
+        .done(function(data) {
+
+                $('#infoprod').empty();
+                $('<div></div>').attr('id','details').appendTo('#infoprod');
+
+                $("#details").html(
+                        '<div class="tolainfo">'+
+                        '<br><span><img class="img-responsive" src="'+data.img+'"/></span></br>'+
+                        '<br><span>Code:   <span id="codprod1">'+data.codprod+'</span></span></br>'+
+                        '<br><span>Product:   <span id="product1">'+data.product+'</span></span></br>'+
+                        '<br><span>Ingredients:     <span id="ingredients1">'+data.ingredients+'</span></span></br>'+
+                        '<br><span>Flavour:     <span id="flavour1">'+data.flavour+'</span></span></br>'+
+                        '<br><span>Brand:     <span id="brand1">'+data.brand+'</span></span></br>'+
+                        '<br><span>KG:    <span id="kg1">'+data.kg+'</span></span></br>'+
+                        '<br><span>Date of caducity:     <span id="datecaducity1">'+data.datecaducity+'</span></span></br>'+
+                        '<br><span>Description:     <span id="datecaducity1">'+data.descr+'</span></span></br>'+
+                        '<br><span>Price:     <span id="datecaducity1">'+data.price+'€</span></span></br>'+
+                        '<br><span><input type="button" class="addtocart" name="addtocart" id="'+data.idproduct+'" value="ADD TO CART"/></span>'+
+                        '</div>'
+                );
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud ha fallado: " +  textStatus);
+            }
+        });
+}
+
+
+
+//////////////////
+////API BOOKS
+///////////////
+var get_apibooks = function() {
+    return new Promise(function(resolve, reject) {
+     $.ajax({ 
+              type: 'GET', 
+              url: "https://www.googleapis.com/books/v1/volumes?q=nutrition", 
+              dataType: 'JSON',
+          })
+          .done(function( data, textStatus, jqXHR ) {
+              resolve(data);
+          })
+          .fail(function( jqXHR, textStatus, errorThrown ) {
+              if ( console && console.log ) {
+                  console.log( "La solicitud ha fallado: " +  textStatus);
+                  reject("Error");
+              }
+          });
+    });
+}
+
+
+function apibooks(){
+    get_apibooks()
+    .then(function(data){
+         var api = "";
+         for (var i=0; i<4; i++ ){
+            var check = "false";
+            var random = Math.floor(Math.random() * data.items.length) + 0;
+            if (i === 0){
+                var arr = [];
+                arr.push(random); 
+
+                var link = data.items[random].volumeInfo.infoLink;
+                var title = data.items[random].volumeInfo.title;
+                var img = data.items[random].volumeInfo.imageLinks.smallThumbnail;
+                api += '<div class="col-lg-4"><a href="'+link+'" target="_blank"><img src="'+img+'"/><p><b>"'+title+'"</b></p><a/></div>'
+            }else{
+                for (var i=0; i<arr.length; i++){
+                    if (random === arr[i]){
+                        check = "true";
+                    }
+                }
+            
+                if (check === "true"){
+                    i -= 1;
+                }else{
+                    arr.push(random);            
+
+                    var link = data.items[random].volumeInfo.infoLink;
+                    var title = data.items[random].volumeInfo.title;
+                    var img = data.items[random].volumeInfo.imageLinks.smallThumbnail;
+                    api += '<div class="col-lg-4"><a href="'+link+'" target="_blank"><img src="'+img+'"/><p><b>"'+title+'"</b></p><a/></div>'
+                }
+            }
+         }
+         
+         $('.books').html(
+             api
+         );
+    })
+    .catch(function(data){
+        console.log( "La solicitud ha fallado");
+    });
+}
+
+
+
+
+
+
+$(document).ready(function () {
+
+    show_details();
+    apibooks();
+
+})

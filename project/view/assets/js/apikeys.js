@@ -1,0 +1,1 @@
+const gMaps_apikey = "AIzaSyAjPEcsq5RMcnRRGGclOQJiNXgCK_pCPn8";

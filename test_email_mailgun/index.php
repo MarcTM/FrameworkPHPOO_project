@@ -11,9 +11,9 @@
     	$config['api_url'] = $apiurl; //API Base URL
 
     	$message = array();
-    	$message['from'] = "prueba@gmail.com";
+    	$message['from'] = "marctorresmartinez@gmail.com";
     	$message['to'] = $email;
-    	$message['h:Reply-To'] = "prueba@gmail.com";
+    	$message['h:Reply-To'] = "marctorresmartinez@gmail.com";
     	$message['subject'] = "Hello, this is a test";
     	$message['html'] = 'Hello ' . $email . ',</br></br> This is a test';
      
