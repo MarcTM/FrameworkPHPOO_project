@@ -4,4 +4,12 @@
         <name>list_cart</name>
         <uri>list_cart</uri>
     </function>
+    <function>
+        <name>logincart</name>
+        <uri>logincart</uri>
+    </function>
+    <function>
+        <name>localdb</name>
+        <uri>localdb</uri>
+    </function>
 </functions>

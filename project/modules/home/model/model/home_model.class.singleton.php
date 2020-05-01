@@ -14,22 +14,29 @@ class home_model {
         return self::$_instance;
     }
 
-    public function obtain_data_list($arrArgument){
-        return $this->bll->obtain_data_list_BLL($arrArgument);
+
+    public function carousel(){
+        return $this->bll->carousel();
     }
-    public function obtain_data_details($arrArgument){
-        return $this->bll->obtain_data_details_BLL($arrArgument);
+
+    public function count_cat(){
+        return $this->bll->count_cat();
     }
-    public function best_breed_home($arrArgument){
-        return $this->bll->best_breed_home_BLL($arrArgument);
+
+    public function category(){
+        return $this->bll->category();
     }
-    public function load_name(){
-        return $this->bll->load_name_BLL();
+
+    public function cat_views(){
+        return $this->bll->cat_views();
     }
-    public function select_auto_name($arrArgument){
-        return $this->bll->select_auto_name_BLL($arrArgument);
+
+    public function count_prods(){
+        return $this->bll->count_prods();
     }
-    public function active_user($arrArgument){
-        return $this->bll->active_user_BLL($arrArgument);
+
+    public function views(){
+        return $this->bll->views();
     }
+
 }

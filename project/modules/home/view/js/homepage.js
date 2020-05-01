@@ -6,11 +6,16 @@ var logedornot = function() {
     return new Promise(function(resolve) {
         $.ajax({
             type: "GET",
-            url: "module/cart/controller/controller_cart.php?op=logincart",
+            url: "?module=cart&function=logincart",
         })
           .done(function( loged, textStatus, jqXHR ) {
               resolve(loged);
           })
+          .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud ha fallado: " +  textStatus);
+            }
+       });
     });
 }
 
@@ -24,7 +29,7 @@ var localtodb = function(id) {
     return new Promise(function(resolve) {
         $.ajax({
             type: "GET",
-            url: "module/cart/controller/controller_cart.php?op=localdb&id="+id,
+            url: "?module=cart&function=localdb&id="+id,
         })
     });
 }
@@ -45,6 +50,7 @@ function fromlocaltodb(){
                 for(var i=0; i<JSONcart.length; i++){
                     localtodb(JSONcart[i].id)
                 }
+
                 localStorage.removeItem('cart');
                 localStorage.removeItem('cart2');
             }
@@ -60,7 +66,7 @@ function fromlocaltodb(){
 //////////
 function carousel() {
     $.ajax({
-        url: "module/inicio/controller/controller_homepage.php?op=carousel",
+        url: "?module=home&function=carousel",
         type: "GET",
         dataType: "JSON",
     })
@@ -74,7 +80,6 @@ function carousel() {
         $('.slider').html(
             img
         );
-
 
         $('.slider').bxSlider({
             mode: 'fade',
@@ -104,11 +109,7 @@ function click_carousel(){
     
         localStorage.setItem('carousel', car);
 
-        if(car==""){ 
-            toastr["info"]("Ingresa criterios de busqueda"),{"iconClass":'toast-info'};
-        }else{    
-            setTimeout('window.location.href = "index.php?page=controller_shop&op=list",1000');
-        }
+        setTimeout('window.location.href = "?module=shop&function=list_shop",1000');
     });
 }
 
@@ -120,10 +121,9 @@ function click_carousel(){
 ///////////
 function ajaxForSearch(offset){
     $.ajax({
-        url: "module/inicio/controller/controller_homepage.php?op=category&offset="+offset,
+        url: "?module=home&function=category&offset="+offset,
         type: "GET",
         dataType: "JSON",
-
     })
     .done(function(data) {  
         var cate = "";
@@ -139,16 +139,11 @@ function ajaxForSearch(offset){
             cate
         );
      })
-     .fail(function( jqXHR, textStatus, errorThrown ) {
-         if ( console && console.log ) {
-             console.log( "La solicitud ha fallado: " +  textStatus);
-         }
-    });
 };
 
 function category() {
     $.ajax({
-        url: "module/inicio/controller/controller_homepage.php?op=count_cat",
+        url: "?module=home&function=count_cat",
         type: "GET",
         dataType: "JSON",
     })
@@ -174,6 +169,11 @@ function category() {
             ajaxForSearch(offset);
         });
      })
+     .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+        }
+   });
 }
 
 function select_cat() {
@@ -186,19 +186,14 @@ function select_cat() {
         var cat = this.getAttribute('id');
 
         $.ajax({
-            url: "module/inicio/controller/controller_homepage.php?op=cat_views&cat="+cat,
+            url: "?module=home&function=cat_views&cat="+cat,
             type: "GET",
             dataType: "JSON",
         })
 
-    
         localStorage.setItem('category', cat);
 
-        if(cat==""){ 
-            toastr["info"]("Ingresa criterios de busqueda"),{"iconClass":'toast-info'};
-        }else{    
-            setTimeout('window.location.href = "index.php?page=controller_shop&op=list",1000');
-        }
+        setTimeout('window.location.href = "?module=shop&function=list_shop",1000');
     });
 }
 
@@ -211,10 +206,9 @@ function select_cat() {
 ///////////////
 function byviews(offset) {
     $.ajax({
-           url: "module/inicio/controller/controller_homepage.php?op=views&offset="+offset,
+           url: "?module=home&function=views&offset="+offset,
            type: "GET",
            dataType: "JSON",
-   
        })
        .done(function(data) {//CHECK SESSION AND DRAWS FAVORITES
             checksession() //fav.js
@@ -233,26 +227,27 @@ function byviews(offset) {
                         '</div><br><br>'+
                         vvv
                     );
-                }else{
-                    for (var i=0; i<data.length; i++ ){
-                        vvv += '<div class="col-lg-4"><img class="img-responsive" id="'+data[i].idproduct+'" src="'+data[i].img+'"/><img id="'+data[i].idproduct+'" class="favorites" src="view/assets/img/favorites/corazonblanco.png"/><p>'+data[i].product+' - '+data[i].kg+'KG<br>'+data[i].brand+'<br>'+data[i].price+'€</p><input type="button" class="addtocart" name="addtocart" id="'+data[i].idproduct+'" value="ADD TO CART"/></div>'
-                    }
+                }//else{
+                //     for (var i=0; i<data.length; i++ ){
+                //         vvv += '<div class="col-lg-4"><img class="img-responsive" id="'+data[i].idproduct+'" src="'+data[i].img+'"/><img id="'+data[i].idproduct+'" class="favorites" src="view/assets/img/favorites/corazonblanco.png"/><p>'+data[i].product+' - '+data[i].kg+'KG<br>'+data[i].brand+'<br>'+data[i].price+'€</p><input type="button" class="addtocart" name="addtocart" id="'+data[i].idproduct+'" value="ADD TO CART"/></div>'
+                //     }
 
-                    $('.byviews').html(
-                        '<div class="bx-controls-direction">'+
-                        '<a class="prev2">Prev</a> | '+
-                        '<a class="next2">Next</a>'+
-                        '</div><br><br>'+
-                        vvv
-                    );
+                //     $('.byviews').html(
+                //         '<div class="bx-controls-direction">'+
+                //         '<a class="prev2">Prev</a> | '+
+                //         '<a class="next2">Next</a>'+
+                //         '</div><br><br>'+
+                //         vvv
+                //     );
 
-                    favuser()
-                    .then(function(data2){
-                        for(var i=0; i<data2.length; i++){
-                            $(".favorites[id="+data2[i].prod+"]").attr("src", "view/assets/img/favorites/corazonrojo.png");
-                        }
-                    })
-                }
+                //     favuser() //favuser.js
+                //     .then(function(data2){
+                //         console.log(data2);
+                //         for(var i=0; i<data2.length; i++){
+                //             $(".favorites[id="+data2[i].prod+"]").attr("src", "view/assets/img/favorites/corazonrojo.png");
+                //         }
+                //     })
+                // }
             });
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
@@ -264,32 +259,32 @@ function byviews(offset) {
 }
 
 function prods_views() {
-$.ajax({
-    url: "module/inicio/controller/controller_homepage.php?op=count_prods",
-    type: "GET",
-    dataType: "JSON",
-})
-.done(function(data) {
-    var cuenta = data.cuenta;
-    var offset = 0;
+    $.ajax({
+        url: "?module=home&function=count_prods",
+        type: "GET",
+        dataType: "JSON",
+    })
+    .done(function(data) {
+        var cuenta = data.cuenta;
+        var offset = 0;
 
-    byviews(offset);
-
-    $(document).on("click", ".next2", function() {
-        offset += 4;
-        if(offset>=cuenta){
-            offset -= 4;
-        }
         byviews(offset);
-    });
 
-    $(document).on("click", ".prev2", function() {
-        offset -= 4;
-        if(offset<0){
+        $(document).on("click", ".next2", function() {
             offset += 4;
-        }
-        byviews(offset);
-    });
+            if(offset>=cuenta){
+                offset -= 4;
+            }
+            byviews(offset);
+        });
+
+        $(document).on("click", ".prev2", function() {
+            offset -= 4;
+            if(offset<0){
+                offset += 4;
+            }
+            byviews(offset);
+        });
     })
 }
 
@@ -301,7 +296,7 @@ function read_prod() {
         var id = this.getAttribute('id');
         localStorage.setItem('infoprod', id);
 
-        setTimeout('window.location.href = "index.php?page=controller_details&op=list",1000');
+        setTimeout('window.location.href = "?module=details&function=list_details",1000');
     })
 }
 
@@ -396,7 +391,7 @@ function dellocalstorage(){
 
 $(document).ready(function () {
 
-    fromlocaltodb();
+    // fromlocaltodb();
     carousel();
     click_carousel()
     category();

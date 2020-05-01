@@ -1,5 +1,5 @@
 <?php
-    define('PROJECT', '/4_adoptions_dogs/');
+    define('PROJECT', '/FrameworkPHP_Marc/project/');
 
     //SITE_ROOT
     define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'] . PROJECT);
@@ -48,6 +48,22 @@
     define('MODEL_HOME', SITE_ROOT . 'modules/home/model/model/');
     define('JS_VIEW_HOME', SITE_PATH . 'modules/home/view/js/');
     
+    // MODEL FAVORITES
+    define('UTILS_FAVORITES', SITE_ROOT . 'modules/favorites/utils/');
+    define('MODEL_PATH_FAVORITES', SITE_ROOT . 'modules/favorites/model/');
+    define('DAO_FAVORITES', SITE_ROOT . 'modules/favorites/model/DAO/');
+    define('BLL_FAVORITES', SITE_ROOT . 'modules/favorites/model/BLL/');
+    define('MODEL_FAVORITES', SITE_ROOT . 'modules/favorites/model/model/');
+    define('JS_VIEW_FAVORITES', SITE_PATH . 'modules/favorites/view/js/');
+
+    // MODEL DETAILS
+    define('UTILS_DETAILS', SITE_ROOT . 'modules/details/utils/');
+    define('MODEL_PATH_DETAILS', SITE_ROOT . 'modules/details/model/');
+    define('DAO_DETAILS', SITE_ROOT . 'modules/details/model/DAO/');
+    define('BLL_DETAILS', SITE_ROOT . 'modules/details/model/BLL/');
+    define('MODEL_DETAILS', SITE_ROOT . 'modules/details/model/model/');
+    define('JS_VIEW_DETAILS', SITE_PATH . 'modules/details/view/js/');
+
     //MODEL_DOGS
     define('UTILS_DOGS', SITE_ROOT . 'modules/dogs/utils/');
     define('MODEL_PATH_DOGS', SITE_ROOT . 'modules/dogs/model/');

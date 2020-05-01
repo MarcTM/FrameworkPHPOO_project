@@ -3,7 +3,7 @@ var checksession = function() {
     return new Promise(function(resolve) {
         $.ajax({ 
                 type: 'GET', 
-                url: "module/login/controller/controller_login.php?op=check_session", 
+                url: "?module=login&function=check_session", 
             })
             .done(function( session, textStatus, jqXHR ) {
                 resolve(session);
@@ -17,7 +17,7 @@ var favuser = function() {
     return new Promise(function(resolve) {
         $.ajax({ 
                 type: 'GET', 
-                url: "module/favorites/controller/controller_favorites.php?op=checkfav",
+                url: "?module=favorites&function=checkfav",
                 dataType: "JSON", 
             })
             .done(function(data2, textStatus, jqXHR) {
@@ -31,7 +31,7 @@ var hearth = function() {
     return new Promise(function(resolve) {
         $.ajax({
             type: "GET",
-            url: "module/favorites/controller/controller_favorites.php?op=checkuser"
+            url: "?module=favorites&function=checkuser"
         })
           .done(function( data, textStatus, jqXHR ) {
               resolve(data);
@@ -67,7 +67,7 @@ function tofav(){
                 }
             }else{
                 alert("You must be registered to add to favorites")
-                setTimeout('window.location.href = "index.php?page=controller_login&op=list_login";',1000);
+                setTimeout('window.location.href = "?module=login&function=list_login";',1000);
             }
          })
     })

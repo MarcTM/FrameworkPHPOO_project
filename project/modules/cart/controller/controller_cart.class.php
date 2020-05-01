@@ -10,6 +10,20 @@
         	loadView('modules/cart/view/', 'cart.html');
 			require_once(VIEW_PATH_INC . "footer.html");
 			require_once(VIEW_PATH_INC . "bottom_page.html");
-	    }
+		}
+		
+		function logincart(){
+			if($_SESSION['type']){
+				echo "true";
+				exit;
+			}else{
+				echo "false";
+				exit;
+			}
+		}
+
+		// function localdb(){
+
+		// }
 
 	}

@@ -5,11 +5,16 @@
 	    }
 
 	    function list_details() {
-	    	require_once(VIEW_PATH_INC . "top/top_page_homepage.html");
+	    	require_once(VIEW_PATH_INC . "top/top_page_details.html");
         	require_once(VIEW_PATH_INC . "menu/menu_default.php");
-        	loadView('modules/home/view/', 'list_home.html');
+        	loadView('modules/details/view/', 'details.html');
 			require_once(VIEW_PATH_INC . "footer.html");
 			require_once(VIEW_PATH_INC . "bottom_page.html");
+		}
+		
+		function show_details() {
+			$json = loadModel(MODEL_DETAILS, "details_model", "show_details");
+			echo json_encode($json);
 	    }
 
 	}

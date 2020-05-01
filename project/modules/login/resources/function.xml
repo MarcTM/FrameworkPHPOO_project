@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <functions>
     <function>
+        <name>check_session</name>
+        <uri>check_session</uri>
+    </function>
+    <function>
         <name>list_login</name>
         <uri>list_login</uri>
     </function>

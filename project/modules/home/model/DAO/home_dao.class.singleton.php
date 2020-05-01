@@ -13,39 +13,40 @@ class home_dao {
         return self::$_instance;
     }
 
-    public function select_data_list($db,$arrArgument) {
-        $sql = "SELECT name,chip,breed,sex,stature,picture,date_birth FROM dogs WHERE breed LIKE '%$arrArgument%' ORDER BY chip";
+
+    public function select_carousel($db) {
+        $sql = "SELECT * FROM carousel";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar_arr($stmt);
+    }
+
+    public function count_cat($db) {
+        $sql = "SELECT COUNT(*) cuenta FROM category";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
 
-    public function select_data_details($db,$arrArgument) {
-        $sql = "SELECT name,chip,breed,sex,stature,picture,date_birth,tlp,country,province,city,cinfo,dinfo FROM dogs WHERE chip = '$arrArgument'";
+    public function select_category($db, $offset) {
+        $sql = "SELECT * FROM category ORDER BY views DESC LIMIT 4 OFFSET $offset";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar_arr($stmt);
+    }
+
+    public function update_views_cat($db, $cat) {
+        $sql = "UPDATE category SET views = views + 1 WHERE id='$cat'";
+        $stmt = $db->ejecutar($sql);
+    }
+
+    public function count_prods($db) {
+        $sql = "SELECT COUNT(*) cuenta FROM products";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
 
-    public function select_best_breed($db,$arrArgument) {
-        $sql = "SELECT breed FROM dogs GROUP BY breed ORDER BY count(*) DESC LIMIT $arrArgument,2";
+    public function select_views($db, $offset) {
+        $sql = "SELECT * FROM products ORDER BY views DESC LIMIT 4 OFFSET $offset";
         $stmt = $db->ejecutar($sql);
-        return $db->listar($stmt);
-    }
-
-    public function select_load_name($db) {
-        $sql = "SELECT DISTINCT name FROM dogs WHERE state = 0";
-        $stmt = $db->ejecutar($sql);
-        return $db->listar($stmt);
-    }
-
-    public function select_auto_name($db,$arrArgument) {
-        $sql = "SELECT DISTINCT name,chip,breed,sex,stature,picture,date_birth FROM dogs WHERE name LIKE '%$arrArgument%' AND state = 0";
-        $stmt = $db->ejecutar($sql);
-        return $db->listar($stmt);
-    }
-
-    public function update_active_user($db,$arrArgument) {
-        $sql = "UPDATE users SET activate = 1 WHERE token = '$arrArgument'";
-        return $db->ejecutar($sql);
+        return $db->listar_arr($stmt);
     }
 
 }

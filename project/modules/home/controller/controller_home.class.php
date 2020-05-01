@@ -10,80 +10,37 @@
         	loadView('modules/home/view/', 'home.html');
 			require_once(VIEW_PATH_INC . "footer.html");
 			require_once(VIEW_PATH_INC . "bottom_page.html");
-	    }
+		}
+		
+		function carousel(){
+			$json = loadModel(MODEL_HOME, "home_model", "carousel");
+			echo json_encode($json);
+		}
 
-	    // function best_breed() {
-	    // 	if ((isset($_POST["best_breed"])) && ($_POST["best_breed"] == true)){
-		// 		$json = array();
-		// 	 	$json = loadModel(MODEL_HOME, "home_model", "best_breed_home",$_POST['position']);
-		// 	 	echo json_encode($json);
-		// 	}
-	    // }
+		function count_cat(){
+			$json = loadModel(MODEL_HOME, "home_model", "count_cat");
+			echo json_encode($json);
+		}
 
-	    // function select_auto_name() {
-	    // 	if ((isset($_POST["select_auto_name"])) && ($_POST["select_auto_name"] == true)){
-		// 		$json = array();
-		// 	 	$json = loadModel(MODEL_HOME, "home_model", "select_auto_name",$_POST['keyword']);
-		// 	 	echo json_encode($json);
-		// 	}
-	    // }
+		function category(){
+			$json = loadModel(MODEL_HOME, "home_model", "category");
+			echo json_encode($json);
+		}
 
-	    // function load_name(){
-	    // 	if ((isset($_POST["load_name"])) && ($_POST["load_name"] == true)){
-		// 		$json = array();
-		// 	 	$json = loadModel(MODEL_HOME, "home_model", "load_name");
-		// 	 	echo json_encode($json);
-		// 	}
-	    // }
-	    
-	    // function selected_best_breed(){
-	    // 	if ((isset($_POST["selected_best_breed"])) && ($_POST["selected_best_breed"] == true)){
-		// 		$_SESSION['selectbreed'] = $_POST['seltbreed'];
-		// 		if ($_SESSION['selectbreed']) {
-		// 			echo json_encode(true);
-		// 			exit();
-		// 		}else{
-		// 			echo json_encode(false);
-		// 			exit();
-		// 		}
-		// 	}
-	    // }
-	    
-	    // function details_list(){
-	    // 	if ((isset($_POST["details_list"])) && ($_POST["details_list"] == true)){
-		// 		$json = array();
-		// 	 	$json = loadModel(MODEL_HOME, "home_model", "obtain_data_details",$_POST["idchip"]);
-		// 	 	echo json_encode($json);
-		// 	}
-	    // }
+		function cat_views(){
+			$json = loadModel(MODEL_HOME, "home_model", "cat_views");
+			echo json_encode($json);
+		}
 
-	    // function get_breed(){
-	    // 	if ((isset($_POST["get_breed"])) && ($_POST["get_breed"] == true)){
-		// 		if (isset($_SESSION['selectbreed'])) {
-		// 			echo $_SESSION['selectbreed'];
-		// 			unset($_SESSION['selectbreed']);
-		// 			exit();
-		// 		}else{
-		// 			echo '%';
-		// 			exit();
-		// 		}
-		// 	}
-	    // }
+		function count_prods(){
+			$json = loadModel(MODEL_HOME, "home_model", "count_prods");
+			echo json_encode($json);
+		}
 
-	    // function load_list(){
-	    // 	if ((isset($_POST["load_list"])) && ($_POST["load_list"] == true)){
-		// 		$json = array();
-		// 	 	$json = loadModel(MODEL_HOME, "home_model", "obtain_data_list",$_POST['rlt_breed'],$_POST['number']);
-		// 	 	echo json_encode($json);
-		// 	}
-	    // }
+		function views(){
+			$json = loadModel(MODEL_HOME, "home_model", "views");
+			echo json_encode($json);
+		}
 
-	    // function active_user(){
-	    // 	if (isset($_GET['param'])) {
-	    // 		loadModel(MODEL_HOME, "home_model", "active_user",$_GET['param']);
-	    // 		setcookie("toastr","ver");
-	    // 		header('Location: ' . SITE_PATH);
-	    // 	}	
-	    // }
 
 	}

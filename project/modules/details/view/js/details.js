@@ -7,10 +7,9 @@ function show_details(){
     $.ajax({
         type: "GET",
         dataType: "JSON",
-        url: "module/details/controller/controller_details.php?op=show_details&id=" + id,
+        url: "?module=details&function=show_details&id=" + id,
     })
         .done(function(data) {
-
                 $('#infoprod').empty();
                 $('<div></div>').attr('id','details').appendTo('#infoprod');
 
@@ -112,7 +111,6 @@ function apibooks(){
 
 
 $(document).ready(function () {
-
     show_details();
     apibooks();
 

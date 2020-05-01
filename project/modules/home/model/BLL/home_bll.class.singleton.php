@@ -16,22 +16,29 @@
 	        return self::$_instance;
 	    }
 
-	    public function obtain_data_list_BLL($arrArgument){
-	      return $this->dao->select_data_list($this->db,$arrArgument);
-	    }
-	    public function obtain_data_details_BLL($arrArgument){
-	      return $this->dao->select_data_details($this->db,$arrArgument);
-	    }
-	    public function best_breed_home_BLL($arrArgument){
-	      return $this->dao->select_best_breed($this->db,$arrArgument);
-	    }
-	    public function load_name_BLL(){
-	      return $this->dao->select_load_name($this->db);
-	    }
-	    public function select_auto_name_BLL($arrArgument){
-	      return $this->dao->select_auto_name($this->db,$arrArgument);
-	    }
-	    public function active_user_BLL($arrArgument){
-	      return $this->dao->update_active_user($this->db,$arrArgument);
-	    }
-	}
+
+		public function carousel(){
+			return $this->dao->select_carousel($this->db);
+		}
+
+		public function count_cat(){
+			return $this->dao->count_cat($this->db);
+		}
+
+		public function category(){
+			return $this->dao->select_category($this->db, $_GET['offset']);
+		}
+
+		public function cat_views(){
+			return $this->dao->update_views_cat($this->db, $_GET['cat']);
+		}
+
+		public function count_prods(){
+			return $this->dao->count_prods($this->db);
+		}
+
+		public function views(){
+			return $this->dao->select_views($this->db, $_GET['offset']);
+		}
+
+}

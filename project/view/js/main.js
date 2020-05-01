@@ -13,5 +13,5 @@ function amigable(url) {
         }
         
     }
-    return "http://localhost/1_Fw_PHP_OO_MVC_jQuery_AngularJS/Framework/9_adoptions_dogs" + link;
+    return "http://localhost/FrameworkPHP_Marc/project" + link;
 }

@@ -10,6 +10,11 @@
         	loadView('modules/home/view/', 'list_home.html');
 			require_once(VIEW_PATH_INC . "footer.html");
 			require_once(VIEW_PATH_INC . "bottom_page.html");
+		}
+
+		function checkfav() {
+			$json = loadModel(MODEL_FAVORITES, "favorites_model", "checkfav");
+			echo json_encode($json);
 	    }
 
 	}
