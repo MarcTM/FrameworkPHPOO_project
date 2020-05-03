@@ -64,21 +64,21 @@
     define('MODEL_DETAILS', SITE_ROOT . 'modules/details/model/model/');
     define('JS_VIEW_DETAILS', SITE_PATH . 'modules/details/view/js/');
 
-    //MODEL_DOGS
-    define('UTILS_DOGS', SITE_ROOT . 'modules/dogs/utils/');
-    define('MODEL_PATH_DOGS', SITE_ROOT . 'modules/dogs/model/');
-    define('DAO_DOGS', SITE_ROOT . 'modules/dogs/model/DAO/');
-    define('BLL_DOGS', SITE_ROOT . 'modules/dogs/model/BLL/');
-    define('MODEL_DOGS', SITE_ROOT . 'modules/dogs/model/model/');
-    define('JS_VIEW_DOGS', SITE_PATH . 'modules/dogs/view/js/');
-    
-    //MODEL_ADOPTIONS
-    define('UTILS_ADOPTIONS', SITE_ROOT . 'modules/adoptions/utils/');
-    define('MODEL_PATH_ADOPTIONS', SITE_ROOT . 'modules/adoptions/model/');
-    define('DAO_ADOPTIONS', SITE_ROOT . 'modules/adoptions/model/DAO/');
-    define('BLL_ADOPTIONS', SITE_ROOT . 'modules/adoptions/model/BLL/');
-    define('MODEL_ADOPTIONS', SITE_ROOT . 'modules/adoptions/model/model/');
-    define('JS_VIEW_ADOPTIONS', SITE_PATH . 'modules/adoptions/view/js/');
+    // MODEL SHOP
+    define('UTILS_SHOP', SITE_ROOT . 'modules/shop/utils/');
+    define('MODEL_PATH_SHOP', SITE_ROOT . 'modules/shop/model/');
+    define('DAO_SHOP', SITE_ROOT . 'modules/shop/model/DAO/');
+    define('BLL_SHOP', SITE_ROOT . 'modules/shop/model/BLL/');
+    define('MODEL_SHOP', SITE_ROOT . 'modules/shop/model/model/');
+    define('JS_VIEW_SHOP', SITE_PATH . 'modules/shop/view/js/');
+
+    // MODEL SEARCH
+    define('UTILS_SEARCH', SITE_ROOT . 'modules/search/utils/');
+    define('MODEL_PATH_SEARCH', SITE_ROOT . 'modules/search/model/');
+    define('DAO_SEARCH', SITE_ROOT . 'modules/search/model/DAO/');
+    define('BLL_SEARCH', SITE_ROOT . 'modules/search/model/BLL/');
+    define('MODEL_SEARCH', SITE_ROOT . 'modules/search/model/model/');
+    define('JS_VIEW_SEARCH', SITE_PATH . 'modules/search/view/js/');
     
     //MODEL_CONTACT
     define('UTILS_CONTACT', SITE_ROOT . 'modules/contact/utils/');
@@ -87,14 +87,6 @@
     define('BLL_CONTACT', SITE_ROOT . 'modules/contact/model/BLL/');
     define('MODEL_CONTACT', SITE_ROOT . 'modules/contact/model/model/');
     define('JS_VIEW_CONTACT', SITE_PATH . 'modules/contact/view/js/');
-    
-    //MODEL_UBICATION
-    define('UTILS_UBICATION', SITE_ROOT . 'modules/ubication/utils/');
-    define('MODEL_PATH_UBICATION', SITE_ROOT . 'modules/ubication/model/');
-    define('DAO_UBICATION', SITE_ROOT . 'modules/ubication/model/DAO/');
-    define('BLL_UBICATION', SITE_ROOT . 'modules/ubication/model/BLL/');
-    define('MODEL_UBICATION', SITE_ROOT . 'modules/ubication/model/model/');
-    define('JS_VIEW_UBICATION', SITE_PATH . 'modules/ubication/view/js/');
     
     //MODEL_LOGIN
     define('UTILS_LOGIN', SITE_ROOT . 'modules/login/utils/');

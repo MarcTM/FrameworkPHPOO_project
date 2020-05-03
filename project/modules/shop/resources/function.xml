@@ -4,4 +4,44 @@
         <name>list_shop</name>
         <uri>list_shop</uri>
     </function>
+    <function>
+        <name>maps</name>
+        <uri>maps</uri>
+    </function>
+    <function>
+        <name>countnormal</name>
+        <uri>countnormal</uri>
+    </function>
+    <function>
+        <name>normalshop</name>
+        <uri>normalshop</uri>
+    </function>
+    <function>
+        <name>countcarousel</name>
+        <uri>countcarousel</uri>
+    </function>
+    <function>
+        <name>fromcarousel</name>
+        <uri>fromcarousel</uri>
+    </function>
+    <function>
+        <name>countcat</name>
+        <uri>countcat</uri>
+    </function>
+    <function>
+        <name>fromcat</name>
+        <uri>fromcat</uri>
+    </function>
+    <function>
+        <name>countsearchbar</name>
+        <uri>countsearchbar</uri>
+    </function>
+    <function>
+        <name>searchbar</name>
+        <uri>searchbar</uri>
+    </function>
+    <function>
+        <name>filter</name>
+        <uri>filter</uri>
+    </function>
 </functions>

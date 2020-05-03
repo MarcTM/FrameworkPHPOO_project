@@ -17,14 +17,13 @@ function fodemap() {
     $.ajax({
         type: "GET",
         dataType: "JSON",
-        url: "module/shop/controller/controller_shop.php?op=maps",
+        url: "?module=shop&function=maps",
     })
     .done(function( data, textStatus, jqXHR ) {
         // console.log(data);
         var markers = [];
 
         function initialize() {
-        
             var map = new google.maps.Map(document.getElementById('mapcat'), {
                 zoom: 7,
                 center: new google.maps.LatLng(-33, 150),
@@ -54,7 +53,7 @@ function fodemap() {
         
         initialize();
 
-     })
+    })
      .fail(function( data, textStatus, jqXHR ) {
          console.log("FAIL: "+data);
      })
@@ -83,7 +82,7 @@ function ajaxForSearch(method) {
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url:"module/shop/controller/controller_shop.php?op=countcat&name="+cat,
+                url:"?module=shop&function=countcat&name="+cat,
                 })
                 .done(function( cuenta, textStatus, jqXHR ) {
                     var count = cuenta.cuenta;
@@ -100,7 +99,7 @@ function ajaxForSearch(method) {
                     $.ajax({
                         type: "GET",
                         dataType: "json",
-                        url:"module/shop/controller/controller_shop.php?op=fromcat&name="+cat+"&offset="+offset,
+                        url:"?module=shop&function=fromcat&name="+cat+"&offset="+offset,
                         })
                         .done(function( data, textStatus, jqXHR ) {
                                 if(data.length==0 || data ==='error'){
@@ -196,7 +195,7 @@ function ajaxForSearch(method) {
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url:"module/shop/controller/controller_shop.php?op=countsearchbar&province="+province+"&shop="+shop+"&prod="+auto,
+                url:"?module=shop&function=countsearchbar&province="+province+"&shop="+shop+"&prod="+auto,
                 })
                 .done(function( cuenta, textStatus, jqXHR ) {
                     var count = cuenta.cuenta;
@@ -213,83 +212,82 @@ function ajaxForSearch(method) {
                     $.ajax({
                         type: "GET",
                         dataType: "json",
-                        url:"module/shop/controller/controller_shop.php?op=searchbar&province="+province+"&shop="+shop+"&prod="+auto+"&offset="+offset,
-                        })
-                        .done(function( data, textStatus, jqXHR ) {
-                                if(data.length==0 || data ==='error'){
+                        url:"?module=shop&function=searchbar&province="+province+"&shop="+shop+"&prod="+auto+"&offset="+offset,
+                    })
+                    .done(function( data, textStatus, jqXHR ) {
+                            if(data.length==0 || data ==='error'){
+                                $('.centered').empty();
+                                $('<div><h3>Su búsqueda no dió resultados.</h3></div>').attr('id','list').appendTo('.centered');
+                            }else{
+                                //CHECK SESSION AND DRAWS FAVORITES
+                                checksession() //fav.js
+                                .then(function(session){
                                     $('.centered').empty();
-                                    $('<div><h3>Su búsqueda no dió resultados.</h3></div>').attr('id','list').appendTo('.centered');
-                                }else{
-                                    //CHECK SESSION AND DRAWS FAVORITES
-                                    checksession() //fav.js
-                                    .then(function(session){
-                                        $('.centered').empty();
-                    
-                                        var shop="";
+                
+                                    var shop="";
 
-                                        if(session==="no"){
-
-                                            for (var i=0; i<data.length; i++ ){
-                                                shop += '<div class="col-lg-4"><img class="img-responsive" id="'+data[i].idproduct+'" src="'+data[i].img+'"/><img id="'+data[i].idproduct+'" class="favorites" src="view/assets/img/favorites/corazonblanco.png"/><p>'+data[i].product+' - '+data[i].kg+'KG<br>'+data[i].brand+'<br>'+data[i].price+'€</p><input type="button" class="addtocart" name="addtocart" id="'+data[i].idproduct+'" value="ADD TO CART"/></div>'
-                                            }
-
-                                            $('.centered').html(
-                                                shop
-                                            );
-                                        }else{
-                                            for (var i=0; i<data.length; i++ ){
-                                                shop += '<div class="col-lg-4"><img class="img-responsive" id="'+data[i].idproduct+'" src="'+data[i].img+'"/><img id="'+data[i].idproduct+'" class="favorites" src="view/assets/img/favorites/corazonblanco.png"/><p>'+data[i].product+' - '+data[i].kg+'KG<br>'+data[i].brand+'<br>'+data[i].price+'€</p><input type="button" class="addtocart" name="addtocart" id="'+data[i].idproduct+'" value="ADD TO CART"/></div>'
-                                            }
-
-                                            $('.centered').html(
-                                                shop
-                                            );
-
-                                            favuser()
-                                            .then(function(data2){
-                                                for(var i=0; i<data2.length; i++){
-                                                    $(".favorites[id="+data2[i].prod+"]").attr("src", "view/assets/img/favorites/corazonrojo.png");
-                                                }
-                                            })
+                                    if(session==="no"){
+                                        for (var i=0; i<data.length; i++ ){
+                                            shop += '<div class="col-lg-4"><img class="img-responsive" id="'+data[i].idproduct+'" src="'+data[i].img+'"/><img id="'+data[i].idproduct+'" class="favorites" src="view/assets/img/favorites/corazonblanco.png"/><p>'+data[i].product+' - '+data[i].kg+'KG<br>'+data[i].brand+'<br>'+data[i].price+'€</p><input type="button" class="addtocart" name="addtocart" id="'+data[i].idproduct+'" value="ADD TO CART"/></div>'
                                         }
 
-            
-                                        if(!localStorage.getItem('page')){
-                                            var page = 1;
-                                        }else{
-                                            var page = localStorage.getItem('page');
+                                        $('.centered').html(
+                                            shop
+                                        );
+                                    }else{
+                                        for (var i=0; i<data.length; i++ ){
+                                            shop += '<div class="col-lg-4"><img class="img-responsive" id="'+data[i].idproduct+'" src="'+data[i].img+'"/><img id="'+data[i].idproduct+'" class="favorites" src="view/assets/img/favorites/corazonblanco.png"/><p>'+data[i].product+' - '+data[i].kg+'KG<br>'+data[i].brand+'<br>'+data[i].price+'€</p><input type="button" class="addtocart" name="addtocart" id="'+data[i].idproduct+'" value="ADD TO CART"/></div>'
                                         }
-                            
-                                        $(".pagination").bootpag({
-                                            total: pages,
-                                            page: page,
-                                            maxVisible: 4,
-                                            next: 'NEXT',
-                                            prev: 'PREV'
-                                        }).on("page", function (e, num) {
-                                            page = num;
-                                            localStorage.setItem('page', page);
-                                            console.log(num);
-                                            if (num == 1){
-                                                offset = 0;
-                                                localStorage.setItem('offset', offset)
-                                            }else{
-                                                var sum = 0;
-                                                for (var i = 1; i<num; i++){
-                                                    sum += 4;
-                                                }
-                                                offset = sum;
-                                                localStorage.setItem('offset', offset)
+
+                                        $('.centered').html(
+                                            shop
+                                        );
+
+                                        favuser()
+                                        .then(function(data2){
+                                            for(var i=0; i<data2.length; i++){
+                                                $(".favorites[id="+data2[i].prod+"]").attr("src", "view/assets/img/favorites/corazonrojo.png");
                                             }
-                                            e.preventDefault();
-                                            ajaxForSearch("searchbar");
-                                        });
+                                        })
+                                    }
+
+        
+                                    if(!localStorage.getItem('page')){
+                                        var page = 1;
+                                    }else{
+                                        var page = localStorage.getItem('page');
+                                    }
+                        
+                                    $(".pagination").bootpag({
+                                        total: pages,
+                                        page: page,
+                                        maxVisible: 4,
+                                        next: 'NEXT',
+                                        prev: 'PREV'
+                                    }).on("page", function (e, num) {
+                                        page = num;
+                                        localStorage.setItem('page', page);
+                                        console.log(num);
+                                        if (num == 1){
+                                            offset = 0;
+                                            localStorage.setItem('offset', offset)
+                                        }else{
+                                            var sum = 0;
+                                            for (var i = 1; i<num; i++){
+                                                sum += 4;
+                                            }
+                                            offset = sum;
+                                            localStorage.setItem('offset', offset)
+                                        }
+                                        e.preventDefault();
+                                        ajaxForSearch("searchbar");
                                     });
-                                }
-                            })
-                            .fail(function( data, textStatus, jqXHR ) {
-                                console.log("FAIL: "+data);
-                            })
+                                });
+                            }
+                        })
+                        .fail(function( data, textStatus, jqXHR ) {
+                            console.log("FAIL: "+data);
+                        })
                 })
         break;
 
@@ -307,7 +305,7 @@ function ajaxForSearch(method) {
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url:"module/shop/controller/controller_shop.php?op=countcarousel&name="+car,
+                url:"?module=shop&function=countcarousel&name="+car,
                 })
                 .done(function( cuenta, textStatus, jqXHR ) {
                     var count = cuenta.cuenta;
@@ -324,7 +322,7 @@ function ajaxForSearch(method) {
                     $.ajax({
                         type: "GET",
                         dataType: "json",
-                        url:"module/shop/controller/controller_shop.php?op=fromcarousel&name="+car+"&offset="+offset,
+                        url:"?module=shop&function=fromcarousel&name="+car+"&offset="+offset,
                         })
                         .done(function( data, textStatus, jqXHR ) {
                                 if(data.length==0 || data ==='error'){
@@ -416,7 +414,7 @@ function ajaxForSearch(method) {
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url:"module/shop/controller/controller_shop.php?op=countnormal",
+                url:"?module=shop&function=countnormal",
                 })
                 .done(function( cuenta, textStatus, jqXHR ) {
                     var count = cuenta.cuenta;
@@ -433,7 +431,7 @@ function ajaxForSearch(method) {
                     $.ajax({
                         type: "GET",
                         dataType: "json",
-                        url:"module/shop/controller/controller_shop.php?op=normalshop&offset="+offset,
+                        url:"?module=shop&function=normalshop&offset="+offset,
                         })
                         .done(function( data, textStatus, jqXHR ) {
                                 if(data.length==0 || data ==='error'){
@@ -464,7 +462,7 @@ function ajaxForSearch(method) {
                                                 shop
                                             );
 
-                                            favuser()
+                                            favuser() //fav.js
                                             .then(function(data2){
                                                 for(var i=0; i<data2.length; i++){
                                                     $(".favorites[id="+data2[i].prod+"]").attr("src", "view/assets/img/favorites/corazonrojo.png");
@@ -554,7 +552,7 @@ function read_prod() {
         var id = this.getAttribute('id');
         localStorage.setItem('infoprod', id);
 
-        setTimeout('window.location.href = "index.php?page=controller_details&op=list",1000');
+        setTimeout('window.location.href = "?module=details&function=list_details",1000');
     })
 }
 
@@ -760,10 +758,9 @@ function envia($checks, $count) {
     $.ajax({
         type: "GET",
         dataType: "JSON",
-        url: "module/shop/controller/controller_shop.php?op=filter&checks=" +$checks+ "&count=" +$count,
+        url: "?module=shop&function=filter&checks=" +$checks+ "&count=" +$count,
     })
     .done(function(data) {
-        console.log(data);
         $('.centered').empty();
         $('#infoprod').empty();
 

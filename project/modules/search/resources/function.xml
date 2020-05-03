@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>prov</name>
+        <uri>prov</uri>
+    </function>
+    <function>
+        <name>firstdrop</name>
+        <uri>firstdrop</uri>
+    </function>
+    <function>
+        <name>autocomplete</name>
+        <uri>autocomplete</uri>
+    </function>
+</functions>

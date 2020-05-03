@@ -13,6 +13,10 @@
         <uri>products</uri>
     </module>
     <module>
+        <name>search</name>
+        <uri>search</uri>
+    </module>
+    <module>
         <name>shop</name>
         <uri>shop</uri>
     </module>

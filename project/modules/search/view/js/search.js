@@ -3,13 +3,13 @@ function firstslot(){
     $.ajax({ 
         type: "GET",
         dataType: "json",
-        url: "view/inc/search/controller/controller_search.php?op=prov" 
+        url: "?module=search&function=prov" 
     })
     .done(function( data, textStatus, jqXHR ) {
-       var $drop = $("#province");
-    //    $drop.empty();
+        var $drop = $("#province");
+        $drop.empty();
 
-         $.each(data, function(i, item) {
+        $.each(data, function(i, item) {
             $drop.append("<option>" + item.city + "</option>")        
         });
     })
@@ -26,10 +26,9 @@ function secondslot(){
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: "view/inc/search/controller/controller_search.php?op=firstdrop&prov=" + province, 
+            url: "?module=search&function=firstdrop&prov=" + province, 
         })
         .done(function( data, textStatus, jqXHR ) {
-            // console.log( data );
             var $drop2 = $("#shop");
             $drop2.empty();
             $drop2.append("<option value=\"\">" + "[Select shop]" + "</option>");
@@ -42,32 +41,26 @@ function secondslot(){
 }
 
 
-function autoc(){
+function autocomplete(){
     $("#autocom").on("keyup", function () {
         var auto=$(this).val();
         var shop=$("#shop").val();
         var autCom = {auto: auto, shop: shop}; 
         $.ajax({
             type: "POST",
-            url: "view/inc/search/controller/controller_search.php?op=autocomplete",  
+            url: "?module=search&function=autocomplete",  
             data: autCom,
         })
         .done(function( data, textStatus, jqXHR ) {
-            console.log(data);
             $('#optionsauto').fadeIn(1000).html(data);// se ve
             ///si selecciono valor
             $('.autoelement').on('click', function(){
                 var id = $(this).children('a').attr('id');
                 console.log(id);
                 $('#autocom').val(id);
-                //$('#autocom').val($('#'+id).attr('data'));
+                
                 $('#optionsauto').fadeOut(1000);
             });
-
-            // $(".cosarara, .slider__img").on('click', function(){
-            //     $('#optionsauto').fadeOut(1000);
-            //     $('#autocom').val("");
-            // });
         });
     });
 }
@@ -94,7 +87,7 @@ function searchbutton(){
             console.log("ingresa criterios de busqueda");
             // toastr["info"]("Ingresa criterios de busqueda"),{"iconClass":'toast-info'};
         }else{
-            window.location.href = 'index.php?page=controller_shop&op=list';
+            window.location.href = '?module=shop&function=list_shop';
         }
     });
 }
@@ -104,7 +97,7 @@ $(document).ready(function () {
 
     firstslot();
     secondslot();
-    autoc();
+    autocomplete();
     searchbutton();
 
 });
