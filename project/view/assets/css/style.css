@@ -244,6 +244,16 @@ margin-left: 120px;
   margin-bottom: 80px;
 }
 
+#tablerecpage{
+  margin-left: 410px;
+  margin-bottom: 80px;
+}
+
+#tablenewpass{
+  margin-left: 410px;
+  margin-bottom: 80px;
+}
+
 .filters_shop {
   margin-top: 150px;
   margin-left: 20px;
@@ -261,7 +271,22 @@ margin-left: 120px;
   padding: 100px;
 }
 
-.options{
+.recpage{
+  text-align: center;
+  padding: 50px;
+}
+
+.newpass{
+  text-align: center;
+  padding: 50px;
+}
+
+
+.options1{
+  float: right;
+}
+
+.options2{
   float: right;
 }
 

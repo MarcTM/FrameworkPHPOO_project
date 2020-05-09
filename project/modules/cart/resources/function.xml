@@ -9,7 +9,27 @@
         <uri>logincart</uri>
     </function>
     <function>
+        <name>showcart</name>
+        <uri>showcart</uri>
+    </function>
+    <function>
+        <name>showlocalcart</name>
+        <uri>showlocalcart</uri>
+    </function>
+    <function>
         <name>localdb</name>
         <uri>localdb</uri>
+    </function>
+    <function>
+        <name>delete</name>
+        <uri>delete</uri>
+    </function>
+    <function>
+        <name>changequ</name>
+        <uri>changequ</uri>
+    </function>
+    <function>
+        <name>checkout</name>
+        <uri>checkout</uri>
     </function>
 </functions>

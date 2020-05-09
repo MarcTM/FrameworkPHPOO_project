@@ -6,7 +6,7 @@
 
 	    function list_contact() {
 	    	require_once(VIEW_PATH_INC . "top/top_page_contact.html");
-        	require_once(VIEW_PATH_INC . "menu/menu_default.php");
+        	require_once(VIEW_PATH_INC . "menu.php");
         	loadView('modules/contact/view/', 'contact.html');
 			require_once(VIEW_PATH_INC . "footer.html");
 			require_once(VIEW_PATH_INC . "bottom_page.html");
@@ -24,13 +24,7 @@
 				'inputMessage' => $data_mail['message']
 			);
 			
-			try{
-				// echo json_encode($arrArgument['inputEmail']);
-	            send_mailgun($arrArgument);
-			} catch (Exception $e) {
-				// echo json_encode($arrArgument['inputEmail']);
-				echo "<div class='alert alert-error'>Server error. Try later...</div>";
-			}
+			send_mailgun($arrArgument);
 		}
 
 	}

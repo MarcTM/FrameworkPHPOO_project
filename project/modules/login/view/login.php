@@ -30,10 +30,16 @@
             <tr>
                 <td><input type="button" name="log_in" id="log_in" value="LOG IN" onclick="validate_login()"/> </td>
             </tr>
+            <tr>
+                <td><input type="button" name="log_in_google" id="log_in_googl" value="GOOGLE""/> </td>
+            </tr><tr>
+                <td><input type="button" name="log_in_github" id="log_in_github" value="GITHUB""/> </td>
+            </tr>
 
         </table>
     </form>
-    Still not registered? <a href="index.php?module=login&function=list_register">Register here</a>
+    Don't remember your password? <a href="?module=login&function=recover_pass">Recover password</a><br>
+    Still not registered? <a href="?module=login&function=list_register">Register here</a>
 
 
 </div>

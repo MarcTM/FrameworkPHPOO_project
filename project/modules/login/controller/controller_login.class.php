@@ -5,21 +5,6 @@
 			 include(UTILS_LOGIN . "functions_login.inc.php");
 		}
 
-		function list_login(){
-			require_once(VIEW_PATH_INC . "top/top_page_home.html");
-        	require_once(VIEW_PATH_INC . "menu/menu_default.html");
-        	loadView('modules/login/view/', 'login.php');
-			require_once(VIEW_PATH_INC . "footer.html");
-			require_once(VIEW_PATH_INC . "bottom_page.html");
-		}
-
-		function list_register(){
-			require_once(VIEW_PATH_INC . "top/top_page_home.html");
-        	require_once(VIEW_PATH_INC . "menu/menu_default.html");
-        	loadView('modules/login/view/', 'register.php');
-			require_once(VIEW_PATH_INC . "footer.html");
-			require_once(VIEW_PATH_INC . "bottom_page.html");
-		}
 
 		function check_session(){
 			if ($_SESSION['user']){
@@ -30,6 +15,85 @@
                 exit();
             }
 		}
+
+		function list_login(){
+			require_once(VIEW_PATH_INC . "top/top_page_home.html");
+        	require_once(VIEW_PATH_INC . "menu.php");
+        	loadView('modules/login/view/', 'login.php');
+			require_once(VIEW_PATH_INC . "footer.html");
+			require_once(VIEW_PATH_INC . "bottom_page.html");
+		}
+
+		function list_register(){
+			require_once(VIEW_PATH_INC . "top/top_page_home.html");
+        	require_once(VIEW_PATH_INC . "menu.php");
+        	loadView('modules/login/view/', 'register.php');
+			require_once(VIEW_PATH_INC . "footer.html");
+			require_once(VIEW_PATH_INC . "bottom_page.html");
+		}
+
+		function recover_pass(){
+			require_once(VIEW_PATH_INC . "top/top_page_home.html");
+        	require_once(VIEW_PATH_INC . "menu.php");
+        	loadView('modules/login/view/', 'recover.php');
+			require_once(VIEW_PATH_INC . "footer.html");
+			require_once(VIEW_PATH_INC . "bottom_page.html");
+		}
+
+		function send_rec_mail(){
+			$result['token'] = loadModel(MODEL_LOGIN, "login_model", "send_rec_mail");
+			$result['email'] = $_POST['email'];
+
+			if($result['token']){
+				$mail = send_mail_recover($result);
+				echo json_encode($mail);
+			}else{
+				echo json_encode("no");
+			}
+		}
+
+		function new_pass(){
+			if (isset($_GET['param'])) {
+				$_SESSION['token'] = $_GET['param'];
+			}
+
+			require_once(VIEW_PATH_INC . "top/top_page_home.html");
+        	require_once(VIEW_PATH_INC . "menu.php");
+        	loadView('modules/login/view/', 'new_pass.php');
+			require_once(VIEW_PATH_INC . "footer.html");
+			require_once(VIEW_PATH_INC . "bottom_page.html");
+		}
+
+		function update_pass(){
+			loadModel(MODEL_LOGIN, "login_model", "update_pass");
+			unset($_SESSION['token']);
+			echo "completed";
+		}
+
+		function check_register(){
+			$json = loadModel(MODEL_LOGIN, "login_model", "check_register");
+			echo json_encode($json);
+		}
+
+		function insert_user(){
+			$data = json_decode($_POST['data'],true);
+
+			$result['token'] = loadModel(MODEL_LOGIN, "login_model", "insert_user");
+			$result['email'] = $data['email'];
+			mailgun_alta($result);
+		}
+
+		function active_user(){
+			if (isset($_GET['param'])) {
+				loadModel(MODEL_LOGIN, "login_model", "active_user");
+			}	
+		}	
+		
+		function validate_login(){
+			$result = loadModel(MODEL_LOGIN, "login_model", "validate_login");
+			echo json_encode($result);
+		}	
+
 
 	// 	function profile_list(){
 	// 		require_once(VIEW_PATH_INC . "header.php");
@@ -48,42 +112,42 @@
 	//         require_once(VIEW_PATH_INC . "footer.html");
 	// 	}
 
-	// 	function validate_login(){
-	// 		$info_data = json_decode($_POST['total_data'],true);
-	// 		$response = validate_data($info_data,'login');
+		function validate_loogin(){
+			$info_data = json_decode($_POST['total_data'],true);
+			$response = validate_data($info_data,'login');
 
-	// 		if ($response['result']) {
-	// 			$data = exist_user($info_data['luser']);
-	// 			$data = $data[0];
-	// 			echo json_encode($data['token']);
-	// 		}else{
-	// 			$jsondata['success'] = false;
-	// 	 		$jsondata['error'] = $response['error'];
- 	// 			header('HTTP/1.0 400 Bad error');
-	// 			echo json_encode($response);
-	// 		}
-	// 	}
+			if ($response['result']) {
+				$data = exist_user($info_data['luser']);
+				$data = $data[0];
+				echo json_encode($data['token']);
+			}else{
+				$jsondata['success'] = false;
+		 		$jsondata['error'] = $response['error'];
+ 				header('HTTP/1.0 400 Bad error');
+				echo json_encode($response);
+			}
+		}
 
-	// 	function validate_register(){
-	// 		$info_data = json_decode($_POST['total_data'],true);
-	// 		$response = validate_data($info_data,'register');
+		function validate_register(){
+			$info_data = json_decode($_POST['total_data'],true);
+			$response = validate_data($info_data,'register');
 
-	// 		if ($response['result']) {
-	// 			$result['token'] = loadModel(MODEL_LOGIN,'login_model','insert_userp',$info_data);
-	// 			if ($result) {
-	// 				$result['type'] = 'alta';
-	// 				$result['inputEmail'] = $info_data['remail'];
-	// 				$result['inputMessage'] = 'Para activar tu cuenta en ohana dogs pulse en el siguiente enlace';
-	// 				enviar_email($result);
-	// 			}
-	// 			echo json_encode($result);
-	// 		}else{
-	// 			$jsondata['success'] = false;
-	// 	 		$jsondata['error'] = $response['error'];
- 	// 			header('HTTP/1.0 400 Bad error');
-	// 			echo json_encode($jsondata);
-	// 		}
-	// 	}
+			if ($response['result']) {
+				$result['token'] = loadModel(MODEL_LOGIN,'login_model','insert_userp',$info_data);
+				if ($result) {
+					$result['type'] = 'alta';
+					$result['inputEmail'] = $info_data['remail'];
+					$result['inputMessage'] = 'Para activar tu cuenta en ohana dogs pulse en el siguiente enlace';
+					enviar_email($result);
+				}
+				echo json_encode($result);
+			}else{
+				$jsondata['success'] = false;
+		 		$jsondata['error'] = $response['error'];
+ 				header('HTTP/1.0 400 Bad error');
+				echo json_encode($jsondata);
+			}
+		}
 
 	// 	function log_social(){
 	// 		$data_social = json_decode($_POST['data_social_net'],true);
@@ -136,29 +200,29 @@
 	// 		}
 	// 	}
 
-	// 	function send_mail_rec(){
-	// 		$user_rpass = $_POST['rpuser'];
-	// 		$result = validate_data($user_rpass,'rec_pass');
-	// 		if ($result['result']) {
-	// 			$result = loadModel(MODEL_LOGIN,'login_model','get_mail_to',$user_rpass);
-	// 			$result = $result[0];
-	// 			$result['token'] = $result['token'];
-	// 			$result['inputEmail'] = $result['email'];
-	// 			if ($result) {
-	// 				$result['type'] = 'changepass';
-	// 				$result['inputMessage'] = 'Para recuperar tu contraseña en ohana dogs pulse en el siguiente enlace';
-	// 				enviar_email($result);
-	// 				echo json_encode(true);
-	// 			}else{
-	// 				echo "error";
-	// 			}
-	// 		}else{
-	// 			$jsondata['success'] = false;
-	// 	 		$jsondata['error'] = $result['error'];
- 	// 			header('HTTP/1.0 400 Bad error');
-	// 			echo json_encode($jsondata);
-	// 		}
-	// 	}
+		function send_mail_rec(){
+			$user_rpass = $_POST['rpuser'];
+			$result = validate_data($user_rpass,'rec_pass');
+			if ($result['result']) {
+				$result = loadModel(MODEL_LOGIN,'login_model','get_mail_to',$user_rpass);
+				$result = $result[0];
+				$result['token'] = $result['token'];
+				$result['inputEmail'] = $result['email'];
+				if ($result) {
+					$result['type'] = 'changepass';
+					$result['inputMessage'] = 'Para recuperar tu contraseña en ohana dogs pulse en el siguiente enlace';
+					enviar_email($result);
+					echo json_encode(true);
+				}else{
+					echo "error";
+				}
+			}else{
+				$jsondata['success'] = false;
+		 		$jsondata['error'] = $result['error'];
+ 				header('HTTP/1.0 400 Bad error');
+				echo json_encode($jsondata);
+			}
+		}
 
 	// 	function update_passwd(){
 	// 		$pass_data = json_decode($_POST['rec_pass'],true);

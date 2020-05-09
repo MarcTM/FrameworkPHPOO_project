@@ -87,6 +87,14 @@
     define('BLL_CONTACT', SITE_ROOT . 'modules/contact/model/BLL/');
     define('MODEL_CONTACT', SITE_ROOT . 'modules/contact/model/model/');
     define('JS_VIEW_CONTACT', SITE_PATH . 'modules/contact/view/js/');
+
+    //MODEL_CART
+    define('UTILS_CART', SITE_ROOT . 'modules/cart/utils/');
+    define('MODEL_PATH_CART', SITE_ROOT . 'modules/cart/model/');
+    define('DAO_CART', SITE_ROOT . 'modules/cart/model/DAO/');
+    define('BLL_CART', SITE_ROOT . 'modules/cart/model/BLL/');
+    define('MODEL_CART', SITE_ROOT . 'modules/cart/model/model/');
+    define('JS_VIEW_CART', SITE_PATH . 'modules/cart/view/js/');
     
     //MODEL_LOGIN
     define('UTILS_LOGIN', SITE_ROOT . 'modules/login/utils/');

@@ -6,7 +6,7 @@ var logedshowcart = function() {
     return new Promise(function(resolve) {
         $.ajax({
             type: "GET",
-            url: "module/cart/controller/controller_cart.php?op=logincart",
+            url: "?module=cart&function=logincart",
         })
           .done(function( loged, textStatus, jqXHR ) {
               resolve(loged);
@@ -22,7 +22,7 @@ var logedshowcart = function() {
 //////////////////
 function gotoshop(){
     $('body').on("click", "#gotoshop", function() {
-        setTimeout('window.location.href = "index.php?module=shop&function=list_shop",1000');
+        setTimeout('window.location.href = "?module=shop&function=list_shop",1000');
     })
 
 }
@@ -39,7 +39,7 @@ var cartdb = function() {
     return new Promise(function(resolve) {
         $.ajax({
             type: "GET",
-            url: "module/cart/controller/controller_cart.php?op=showcart",
+            url: "?module=cart&function=showcart",
             dataType: "JSON"
         })
           .done(function( cart, textStatus, jqXHR ) {
@@ -53,7 +53,7 @@ var localcart = function(id) {
     return new Promise(function(resolve) {
         $.ajax({
             type: "GET",
-            url: "module/cart/controller/controller_cart.php?op=showlocalcart&id="+id,
+            url: "?module=cart&function=showlocalcart&id="+id,
             dataType: "JSON"
         })
           .done(function( cart, textStatus, jqXHR ) {
@@ -71,7 +71,7 @@ var localtodb = function(id) {
     return new Promise(function(resolve) {
         $.ajax({
             type: "GET",
-            url: "module/cart/controller/controller_cart.php?op=localdb&id="+id,
+            url: "?module=cart&function=localdb&id="+id,
         })
     });
 }
@@ -251,7 +251,7 @@ function deletefromcart(){
 // DELETE FOR LOGED USER
                 $.ajax({
                     type: "GET",
-                    url: "module/cart/controller/controller_cart.php?op=delete&id="+id,
+                    url: "?module=cart&function=delete&id="+id,
                 })
                 .done(function( del, textStatus, jqXHR ) {
                     showcart();
@@ -279,7 +279,6 @@ function deletefromcart(){
                 }
 
                 showcart();
-
             }
         })
     })
@@ -303,16 +302,14 @@ function quantity(){
 // LOGED USER CHANGE QUANTITY
                 $.ajax({
                     type: "GET",
-                    url: "module/cart/controller/controller_cart.php?op=changequ&num="+auto+"&id="+id,
+                    url: "?module=cart&function=changequ&num="+auto+"&id="+id,
                 })
 
                 showcart();
-
             }else{
 // NOT LOGED USER CHANGE QUANTITY
                 alert("YOU NEED TO LOG IN TO CONTINUE SHOPPING");
-                setTimeout('window.location.href = "index.php?page=controller_login&op=list_login&needlogin=true",1000');
-
+                setTimeout('window.location.href = "?module=login&function=list_login&needlogin=true",1000');
             }
         })
     })
@@ -330,16 +327,14 @@ function quantity(){
 // LOGED USER CHANGE QUANTITY
                 $.ajax({
                     type: "GET",
-                    url: "module/cart/controller/controller_cart.php?op=changequ&num="+auto+"&id="+id,
+                    url: "?module=cart&function=changequ&num="+auto+"&id="+id,
                 })
 
                 showcart();
-
             }else{
 // NOT LOGED USER CHANGE QUANTITY
                 alert("YOU NEED TO LOG IN TO CONTINUE SHOPPING");
-                setTimeout('window.location.href = "index.php?page=controller_login&op=list_login&needlogin=true",1000');
-                
+                setTimeout('window.location.href = "?module=login&function=list_login&needlogin=true",1000');
             }
         })
     })
@@ -362,14 +357,12 @@ function checkout(){
 
                 $.ajax({
                     type: "GET",
-                    url: "module/cart/controller/controller_cart.php?op=checkout",
+                    url: "?module=cart&function=checkout",
                 })
-
             }else{
 // CHECKOUT FOR NOT LOGED USER
                 alert("LOG IN to purchase your order");
-                setTimeout('window.location.href = "index.php?page=controller_login&op=list_login&purch=on",1000');
-
+                setTimeout('window.location.href = "?module=login&function=list_login&purch=on",1000');
             }
         })
     })

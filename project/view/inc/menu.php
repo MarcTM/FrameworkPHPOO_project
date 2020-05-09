@@ -1,42 +1,63 @@
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+<div class="toplogin">
+  <div class="options1" style="visibility: hidden;"><a id="login_html" data-tr="LOG IN">LOG IN</a>&nbsp;&nbsp;&nbsp;<a id="register_html" data-tr="REGISTER">REGISTER</a> <br><br><a id="cart" href="<?php amigable('?module=cart&function=list_cart'); ?>">Cart</a></div>
+  <div class="language">
+    <form>
+        <select name="idiom" id="idiom">
+            <option value="en" data-tr="English" id="btn-en">English</option>
+            <option value="es" data-tr="Spanish" id="btn-es">Spanish</option>
+            <option value="va" data-tr="Valencian" id="btn-va">Valencian</option>
+        </select>
+    </form>
+  </div>
+  <div class="options2" style="visibility: hidden;">Hola <?php echo $_SESSION['user']?> &nbsp;&nbsp;&nbsp; <img id="imgprofile" src="<?php echo $_SESSION['avatar'] ?>"/> &nbsp;&nbsp;&nbsp; <a id="logout_html" data-tr="LOG OUT">LOG OUT</a> <br><a id="cart" href="?module=cart&function=list_cart">Cart</a></div>
+</div>
+
+<div class="navbar navbar-inverse navbar-static-top">
     <div class="container">
-      <span class="navbar-brand">Ohana dogs</span>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fa fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item" >
-            <a class="nav-link" id="<?php if($_GET['module'] === 'home'){echo 'active_menu_color';}else{echo '';} ?>" href="<?php amigable('?module=home&function=list_home'); ?>">Inicio</a>
-          </li>
-          <li class="nav-item" >
-            <a class="nav-link" id="<?php if($_GET['module'] === 'adoptions'){echo 'active_menu_color';}else{echo '';} ?>" href="<?php amigable('?module=adoptions&function=list_adoptions'); ?>">Adopciones</a>
-          </li>
-          <li class="nav-item" >
-            <a class="nav-link" id="<?php if($_GET['module'] === 'contact'){echo 'active_menu_color';}else{echo '';} ?>" href="<?php amigable('?module=contact&function=list_contact'); ?>">Contact</a>
-          </li>
-          
-          <div id="print_menu"></div>
-          
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<?php amigable('?module=home&function=list_home'); ?>" data-tr="HOMEPAGE">HOMEPAGE</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a id="localdel" href="<?php amigable('?module=shop&function=list_shop'); ?>" data-tr="SHOP">SHOP</a></li>
+          <li><a href="<?php amigable('?module=services&function=list_services'); ?>" data-tr="SERVICES">SERVICES</a></li>
+		      <li><a href="<?php amigable('?module=aboutus&function=list_aboutus'); ?>" data-tr="MEET US">MEET US</a></li>
+          <li><a href="<?php amigable('?module=contact&function=list_contact'); ?>" data-tr="CONTACT">CONTACT US</a></li>
         </ul>
       </div>
-    </div>
-  </nav>
+</div>
 
-  
-    <!-- Page Header -->
-    <header class="masthead" style="background-image: url('<?php echo IMG_PATH ?>header.jpg')">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="page-heading">
-              <h1>Ohana dogs</h1>
-              <span class="subheading">No compres, adopta.</span>
-            </div>
-          </div>
-        </div>
+</div>
+<div class="navbar navbar-inverse navbar-static-top cosarara">
+  <form class="search">
+
+
+    <div class="grr"> 
+      <select id="province">
+        <option value="">[Select province]</option>
+      </select>
+
+
+      <select id="shop">
+        <option value="">[Select shop]</option>
+      </select>
       </div>
-    </header>
+
+
+    <div class="autocomplete"> 
+       <input id="autocom" type="text"/>
+       <div id="optionsauto"></div> 
+    </div>
+	
+     
+    <div class="elbuscar">
+      <a id="searchlist">SEARCH</a>
+    </div>   
+
+  </form>
+</div>

@@ -43,7 +43,7 @@
 
         </table>
     </form>
-    Already registered? <a href="index.php?module=login&function=list_login">Login here</a>
+    Already registered? <a href="?module=login&function=list_login">Login here</a>
 
 
 </div>

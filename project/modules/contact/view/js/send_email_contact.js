@@ -2,7 +2,6 @@ $(document).ready(function(){
 	$('.ajaxLoader').fadeOut("fast");
 
 	$(document).on('click','#send_contact',function(){
-		result = true;
 		$(".error").remove();
 
 		var pname = /^[a-zA-Z]+[\-'\s]?[a-zA-Z]{2,51}$/;
@@ -35,20 +34,20 @@ $(document).ready(function(){
 		// 	return false;
 		// }
 		
-		if (result) {
-			$('#send_contact').attr('disabled', true);
-			$('.ajaxLoader').fadeIn("fast");
-			var data = {"cname":$("#cname").val(),"cemail":$("#cemail").val(),"matter":$("#matter").val(),"message":$("#message").val()};
-			var fin_data = JSON.stringify(data);
-			$.post("?module=contact&function=send_email",{"fin_data":fin_data},function(data,event){
-				$('.ajaxLoader').fadeOut("fast");
-				$("#rltsendmessage").html("Message sent correctly to the admin").fadeIn("slow");
-                    
-			    setTimeout(function() {
-			        $("#rltsendmessage").fadeOut("slow")
-			    }, 5000);
-			});
-		}
-	});
+		$('#send_contact').attr('disabled', true);
+		$('.ajaxLoader').fadeIn("fast");
+		var data = {"cname":$("#cname").val(),"cemail":$("#cemail").val(),"matter":$("#matter").val(),"message":$("#message").val()};
+		var fin_data = JSON.stringify(data);
 
+
+		$.post("?module=contact&function=send_email",{"fin_data":fin_data},function(data,event){
+			$('#send_contact').attr('disabled', false);
+			$('.ajaxLoader').fadeOut("fast");
+			$("#rltsendmessage").html("Message sent correctly to the admin").fadeIn("slow");
+				
+			setTimeout(function() {
+				$("#rltsendmessage").fadeOut("slow")
+			}, 5000);
+		});
+	});
 });

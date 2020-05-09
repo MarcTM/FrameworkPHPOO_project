@@ -1,6 +1,6 @@
 ////////////////
 ////FUNCTIONS VALIDATE
-///////////////
+//////////////////
 function validate_user(user){
     if (user.length >= 2 && user.length <= 10) {
         return true;
@@ -55,14 +55,34 @@ function validate_login(){
         document.getElementById('e_pass').innerHTML = "";
     }
     
-    
-    document.login_user.submit();
-    document.login_user.action="index.php?page=controller_login&op=list_login";
+
+    var email = $("#email").val();
+    var pass = $("#pass").val();
+    var data = {'email':email, 'pass':pass};
+
+    $.ajax({
+        url: "?module=login&function=validate_login",
+        type: "POST",
+        data: {'credentials':JSON.stringify(data)},
+        dataType: "JSON",
+    })
+    .done(function(cred) {
+        if(cred==="not exists"){
+            alert("Your email or password is incorrect");
+        }else if(cred==="not activated"){
+            alert("Check your email to activate your account");
+        }else if(cred==="incorrect"){
+            alert("Your email or password is incorrect");
+        }else{
+            localStorage.setItem('id_token', cred);
+            setTimeout(function(){ window.location.href = "?module=home&function=list_home" }, 2000);
+        }
+    })
 }
 
 
 ////////////////
-////VALIDATE REGISTER
+////VALIDATE REGISTER AND INSERT USER
 ///////////////
 function validate_register(){
 
@@ -92,10 +112,35 @@ function validate_register(){
         return 0;
     }else{
         document.getElementById('e_pass').innerHTML = "";
-    }   
+    } 
 
-    document.registeruser.submit();
-    document.registeruser.action="index.php?page=controller_login&op=list_register";
+
+    var email = $("#email").val();
+    var user = $("#user").val();
+    var pass = $("#pass").val();
+
+    $.ajax({
+        url: "?module=login&function=check_register&email="+email+"&user="+user,
+        type: "GET",
+        dataType: "JSON",
+    })
+    .done(function(data) {
+        if(data===false){
+            var data = {'email':email, 'user':user, 'pass':pass};
+
+            $.ajax({
+                url: "?module=login&function=insert_user",
+                type: "POST",
+                data: {data:JSON.stringify(data)},
+                dataType: "JSON"
+            })
+
+            console.log("You have received an email, go and activate your account");
+            setTimeout(function(){ window.location.href = "?module=login&function=list_login" }, 3000);
+        }else{
+            alert("This account already exists");
+        }
+    })
 }
 
 
@@ -103,23 +148,86 @@ function validate_register(){
 
 
 ////////////////
-////LOGIN / REGISTER / LOGOUT
+//// LOGIN / REGISTER / LOGOUT
 ///////////////
 function gotologin(){
     $('body').on("click", "#login_html", function() {
-        setTimeout('window.location.href = "index.php?module=login&function=list_login",1000');
+        setTimeout('window.location.href = "?module=login&function=list_login",1000');
     });
 }
 
 function gotoregister(){
     $('body').on("click", "#register_html", function() {
-        setTimeout('window.location.href = "index.php?module=login&function=list_register",1000');
+        setTimeout('window.location.href = "?module=login&function=list_register",1000');
     });
 }
 
 function logout(){
     $('body').on("click", "#logout_html", function() {
-        setTimeout('window.location.href = "index.php?module=login&function=logout",1000');
+        localStorage.removeItem('id_token');
+        setTimeout('window.location.href = "?module=home&function=list_home",1000');
+    });
+}
+
+
+
+/////////////
+//// RECOVER PASSWORD
+//////////////////77
+function recover_pass(){
+    $('body').on("click", "#rec", function() {
+        var email = validate_email($("#emailr").val());
+        
+        if(!email){
+            document.getElementById('e_emailr').innerHTML = " * Ivalid email";
+            return 0;
+        }else{
+            document.getElementById('e_emailr').innerHTML = "";
+        }
+
+        $.ajax({
+            url: "?module=login&function=send_rec_mail",
+            type: "POST",
+            data: {'email':$("#emailr").val()},
+            dataType: "JSON"
+        })
+        .done(function(data){
+            if(data===false){
+                alert("Not registered");
+            }else{
+                alert("Check your email");
+            }
+        })
+    });
+}
+
+function new_pass(){
+    $('body').on("click", "#new", function() {
+        var pass = validate_pass($("#passn").val());
+
+        if(!pass){
+            document.getElementById('e_passn').innerHTML = " * Introduce at least 6 characters";
+            return 0;
+        }else{
+            document.getElementById('e_passn').innerHTML = "";
+        }
+
+        if($("#passn").val() != $("#rpassn").val()){
+            document.getElementById('e_rpassn').innerHTML = " * This is not the same password";
+            return 0;
+        }else{
+            document.getElementById('e_rpassn').innerHTML = "";
+        }
+
+        $.ajax({
+            url: "?module=login&function=update_pass",
+            type: "POST",
+            data: {'pass':$("#passn").val()},
+        })
+        .done(function(data){
+            alert("Password changed");
+            setTimeout('window.location.href = "?module=login&function=list_login", 3000');
+        })
     });
 }
 
@@ -131,5 +239,7 @@ $(document).ready(function () {
     gotologin();
     gotoregister();
     logout();
+    recover_pass();
+    new_pass();
 
 });

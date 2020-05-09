@@ -15,11 +15,33 @@ class login_model {
     }
 
 
+    public function check_register(){
+        return $this->bll->check_register();
+    }
+
+    public function insert_user(){
+        return $this->bll->insert_user();
+    }
+
+    public function active_user(){
+        $this->bll->active_user();
+    }
+
+    public function validate_login(){
+        return $this->bll->validate_login();
+    }
+
+    public function send_rec_mail(){
+        return $this->bll->send_rec_mail();
+    }
+
+    public function update_pass(){
+        $this->bll->update_pass();
+    }
+
+
     // public function data_social($arrArgument){
     //     return $this->bll->data_social_BLL($arrArgument);
-    // }
-    // public function insert_userp($arrArgument){
-    //     return $this->bll->insert_userp_BLL($arrArgument);
     // }
     // public function rid_social($arrArgument){
     //     return $this->bll->rid_social_BLL($arrArgument);
