@@ -84,8 +84,7 @@ function searchbutton(){
         localStorage.setItem('val', auto);
 
         if((province=="")||(shop=="")||(auto==="")){
-            console.log("ingresa criterios de busqueda");
-            // toastr["info"]("Ingresa criterios de busqueda"),{"iconClass":'toast-info'};
+            toastr["warning"]("Enter all search fields", "COMPLETE ALL FIELDS");
         }else{
             window.location.href = '?module=shop&function=list_shop';
         }

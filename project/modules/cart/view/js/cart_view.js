@@ -164,8 +164,8 @@ function showcart(){
                 $('<div></div>').attr('id','cartdetails').appendTo('.cart');
 
                 $("#cartdetails").html(
-                        '<p class="emptycart"><b>CART IS EMPTY</b></p>'+
-                        '<div class="gotoshop"><input type="button" id="gotoshop" value="GO TO SHOP"></div>'
+                    '<p class="emptycart"><b>CART IS EMPTY</b></p>'+
+                    '<div class="gotoshop"><input type="button" id="gotoshop" value="GO TO SHOP"></div>'
                 );
 
             }else{
@@ -308,8 +308,10 @@ function quantity(){
                 showcart();
             }else{
 // NOT LOGED USER CHANGE QUANTITY
-                alert("YOU NEED TO LOG IN TO CONTINUE SHOPPING");
-                setTimeout('window.location.href = "?module=login&function=list_login&needlogin=true",1000');
+                toastr["info"]("You need to log in to continue shopping", "LOG IN");
+                setTimeout(function() {
+                    window.location.href = "?module=login&function=list_login&needlogin=true"
+                }, 4000);
             }
         })
     })
@@ -333,8 +335,10 @@ function quantity(){
                 showcart();
             }else{
 // NOT LOGED USER CHANGE QUANTITY
-                alert("YOU NEED TO LOG IN TO CONTINUE SHOPPING");
-                setTimeout('window.location.href = "?module=login&function=list_login&needlogin=true",1000');
+                toastr["info"]("You need to log in to continue shopping", "LOG IN");
+                setTimeout(function() {
+                    window.location.href = "?module=contact&function=list_login&needlogin=true"
+                }, 4000);
             }
         })
     })
@@ -353,16 +357,19 @@ function checkout(){
         .then(function(loged){
             if(loged==="true"){
 // CHECKOUT FOR LOGED USER
-                alert("PRODUCTS PURCHASED");
-
-                $.ajax({
-                    type: "GET",
-                    url: "?module=cart&function=checkout",
-                })
+                toastr["success"]("Products purchased", "SUCCESS");
+                setTimeout(function() {
+                    $.ajax({
+                        type: "GET",
+                        url: "?module=cart&function=checkout",
+                    })
+                }, 4000);
             }else{
 // CHECKOUT FOR NOT LOGED USER
-                alert("LOG IN to purchase your order");
-                setTimeout('window.location.href = "?module=login&function=list_login&purch=on",1000');
+                toastr["info"]("Log in to purchase your orded", "LOG IN");
+                setTimeout(function() {
+                    window.location.href = "?module=login&function=list_login&purch=on"
+                }, 4000);
             }
         })
     })

@@ -24,7 +24,7 @@ function sl_google(){
     $('body').on("click", "#log_in_google", function() {
       authService.signInWithPopup(provider)
         .then(function(result) {
-             // console.log(result.user.displayName);
+            // console.log(result.user.displayName);
             // console.log(result.user.email);
             // console.log(result.user.photoURL);
             // console.log(result.user.uid);
@@ -48,7 +48,7 @@ function sl_google(){
                         setTimeout('window.location.href = "?module=home&function=list_home", 3000');
                     })
                     .catch(function(error) {
-                        console.log('Se ha encontrado un error:', error);
+                        toastr["error"]("An error was found while accessing your account", "ERROR");
                     });
                 }else{
                     localStorage.setItem('id_token', user.token);
@@ -73,10 +73,10 @@ function sl_github(){
       $('body').on("click", "#log_in_github", function() {
           authService.signInWithPopup(provider2)
           .then(function(result) {
-              console.log(result.additionalUserInfo.username);
-              console.log(result.user.displayName);
-              console.log(result.user.email);
-              console.log(result.user.photoURL);
+            //   console.log(result.additionalUserInfo.username);
+            //   console.log(result.user.displayName);
+            //   console.log(result.user.email);
+            //   console.log(result.user.photoURL);
 
             $.ajax({
                 url: "?module=login&function=check_user_social",
@@ -97,7 +97,7 @@ function sl_github(){
                         setTimeout('window.location.href = "?module=home&function=list_home", 3000');
                     })
                     .catch(function(error) {
-                        console.log('Se ha encontrado un error:', error);
+                        toastr["error"]("An error was found while accessing your account", "ERROR");
                     });
                 }else{
                     localStorage.setItem('id_token', user.token);
@@ -105,8 +105,8 @@ function sl_github(){
                 }
             })
           }).catch(function(error) {
-            //   console.log(error);
-            console.log("Couldn't access to your account");
+                //   console.log(error);
+                toastr["error"]("Couldn't acces your account", "ERROR");
           });
       })
 }

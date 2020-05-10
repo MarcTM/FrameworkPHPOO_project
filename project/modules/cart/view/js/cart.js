@@ -34,7 +34,6 @@ var addselected = function(id) {
 
 
 function tocart(){
-
     $('body').on("click", ".addtocart", function() {
         var id = this.getAttribute('id');
 
@@ -45,9 +44,9 @@ function tocart(){
                 addselected(id)
                 .then(function(data){
                     if(data!=="not exists"){
-                        alert("YOU ALREADY HAVE THIS PRODUCT IN YOUR CART");
+                        toastr["error"]("You already have this product in your cart", "ERROR");
                     }else{
-                        alert("PRODUCT ADDED TO CART");
+                        toastr["success"]("Product added successfully to cart", "PRODUCT ADDED");
                     }
                 })
             }else{
@@ -61,7 +60,7 @@ function tocart(){
                     var JSONcart = JSON.stringify(arrcart);
                     localStorage.setItem('cart', JSONcart);
 
-                    alert("PRODUCT ADDED TO CART");
+                    toastr["success"]("Product added successfully to cart", "PRODUCT ADDED");
                 }else{
                     var repeat = "false";
                     var arrcart = JSON.parse(localStorage['cart']);
@@ -73,7 +72,7 @@ function tocart(){
                     }
 
                     if(repeat==="true"){
-                        alert("YOU ALREADY HAVE THIS PRODUCT IN YOUR CART");
+                        toastr["error"]("You already have this product in your cart", "ERROR");
                     }else{
                         var objcart = {id: id, quantity: 1};
                         arrcart.push(objcart);
@@ -81,13 +80,12 @@ function tocart(){
                         var JSONcart = JSON.stringify(arrcart);
                         localStorage.setItem('cart', JSONcart);
 
-                        alert("PRODUCT ADDED TO CART");
+                        toastr["success"]("Product added successfully to cart", "PRODUCT ADDED");
                     }
                 }
             }
         })
     })
-
 }
 
 

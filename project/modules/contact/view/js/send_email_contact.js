@@ -35,19 +35,17 @@ $(document).ready(function(){
 		// }
 		
 		$('#send_contact').attr('disabled', true);
-		$('.ajaxLoader').fadeIn("fast");
 		var data = {"cname":$("#cname").val(),"cemail":$("#cemail").val(),"matter":$("#matter").val(),"message":$("#message").val()};
 		var fin_data = JSON.stringify(data);
 
 
 		$.post("?module=contact&function=send_email",{"fin_data":fin_data},function(data,event){
 			$('#send_contact').attr('disabled', false);
-			$('.ajaxLoader').fadeOut("fast");
-			$("#rltsendmessage").html("Message sent correctly to the admin").fadeIn("slow");
-				
+			toastr["success"]("Message sent correctly to admin", "MESSAGE SENT");
+
 			setTimeout(function() {
-				$("#rltsendmessage").fadeOut("slow")
-			}, 5000);
+				window.location.href = "?module=contact&function=list_contact"
+			}, 4000);
 		});
 	});
 });

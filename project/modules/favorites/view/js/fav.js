@@ -66,8 +66,10 @@ function tofav(){
                     })
                 }
             }else{
-                alert("You must be registered to add to favorites")
-                setTimeout('window.location.href = "?module=login&function=list_login";',1000);
+                toastr["error"]("You must be registered to add to favorites", "LOG IN");
+                setTimeout(function() {
+                    window.location.href = "?module=login&function=list_login"
+                }, 4000);
             }
          })
     })

@@ -9,31 +9,26 @@ function show_details(){
         dataType: "JSON",
         url: "?module=details&function=show_details&id=" + id,
     })
-        .done(function(data) {
-                $('#infoprod').empty();
-                $('<div></div>').attr('id','details').appendTo('#infoprod');
+    .done(function(data) {
+            $('#infoprod').empty();
+            $('<div></div>').attr('id','details').appendTo('#infoprod');
 
-                $("#details").html(
-                        '<div class="tolainfo">'+
-                        '<br><span><img class="img-responsive" src="'+data.img+'"/></span></br>'+
-                        '<br><span>Code:   <span id="codprod1">'+data.codprod+'</span></span></br>'+
-                        '<br><span>Product:   <span id="product1">'+data.product+'</span></span></br>'+
-                        '<br><span>Ingredients:     <span id="ingredients1">'+data.ingredients+'</span></span></br>'+
-                        '<br><span>Flavour:     <span id="flavour1">'+data.flavour+'</span></span></br>'+
-                        '<br><span>Brand:     <span id="brand1">'+data.brand+'</span></span></br>'+
-                        '<br><span>KG:    <span id="kg1">'+data.kg+'</span></span></br>'+
-                        '<br><span>Date of caducity:     <span id="datecaducity1">'+data.datecaducity+'</span></span></br>'+
-                        '<br><span>Description:     <span id="datecaducity1">'+data.descr+'</span></span></br>'+
-                        '<br><span>Price:     <span id="datecaducity1">'+data.price+'€</span></span></br>'+
-                        '<br><span><input type="button" class="addtocart" name="addtocart" id="'+data.idproduct+'" value="ADD TO CART"/></span>'+
-                        '</div>'
-                );
-        })
-        .fail(function( jqXHR, textStatus, errorThrown ) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
-            }
-        });
+            $("#details").html(
+                    '<div class="tolainfo">'+
+                    '<br><span><img class="img-responsive" src="'+data.img+'"/></span></br>'+
+                    '<br><span>Code:   <span id="codprod1">'+data.codprod+'</span></span></br>'+
+                    '<br><span>Product:   <span id="product1">'+data.product+'</span></span></br>'+
+                    '<br><span>Ingredients:     <span id="ingredients1">'+data.ingredients+'</span></span></br>'+
+                    '<br><span>Flavour:     <span id="flavour1">'+data.flavour+'</span></span></br>'+
+                    '<br><span>Brand:     <span id="brand1">'+data.brand+'</span></span></br>'+
+                    '<br><span>KG:    <span id="kg1">'+data.kg+'</span></span></br>'+
+                    '<br><span>Date of caducity:     <span id="datecaducity1">'+data.datecaducity+'</span></span></br>'+
+                    '<br><span>Description:     <span id="datecaducity1">'+data.descr+'</span></span></br>'+
+                    '<br><span>Price:     <span id="datecaducity1">'+data.price+'€</span></span></br>'+
+                    '<br><span><input type="button" class="addtocart" name="addtocart" id="'+data.idproduct+'" value="ADD TO CART"/></span>'+
+                    '</div>'
+            );
+    })
 }
 
 
@@ -47,17 +42,11 @@ var get_apibooks = function() {
               type: 'GET', 
               url: "https://www.googleapis.com/books/v1/volumes?q=nutrition", 
               dataType: 'JSON',
-          })
-          .done(function( data, textStatus, jqXHR ) {
-              resolve(data);
-          })
-          .fail(function( jqXHR, textStatus, errorThrown ) {
-              if ( console && console.log ) {
-                  console.log( "La solicitud ha fallado: " +  textStatus);
-                  reject("Error");
-              }
-          });
-    });
+    })
+    .done(function( data, textStatus, jqXHR ) {
+        resolve(data);
+    })
+  });
 }
 
 

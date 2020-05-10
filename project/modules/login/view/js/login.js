@@ -68,11 +68,11 @@ function validate_login(){
     })
     .done(function(cred) {
         if(cred==="not exists"){
-            alert("Your email or password is incorrect");
+            toastr["error"]("Your email or password is incorrect", "INCORRECT CREDENTIALS");
         }else if(cred==="not activated"){
-            alert("Check your email to activate your account");
+            toastr["info"]("Check your email to activate your account", "CHECK YOUR EMAIL");
         }else if(cred==="incorrect"){
-            alert("Your email or password is incorrect");
+            toastr["error"]("Your email or password is incorrect", "INCORRECT CREDENTIALS");
         }else{
             localStorage.setItem('id_token', cred);
             setTimeout(function(){ window.location.href = "?module=home&function=list_home" }, 2000);
@@ -135,10 +135,12 @@ function validate_register(){
                 dataType: "JSON"
             })
 
-            console.log("You have received an email, go and activate your account");
-            setTimeout(function(){ window.location.href = "?module=login&function=list_login" }, 3000);
+            toastr["info"]("You have received an email, go and activate your account", "CHECK YOUR EMAIL");
+            setTimeout(function() {
+                window.location.href = "?module=login&function=list_login"
+            }, 5000);
         }else{
-            alert("This account already exists");
+            toastr["warning"]("This account already exists", "ACCOUNT EXISTS");
         }
     })
 }
