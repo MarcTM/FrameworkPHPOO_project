@@ -23,6 +23,19 @@ class login_model {
         return $this->bll->insert_user();
     }
 
+    ////////////
+	// GOOGLE AND GITHUB
+	//////////////////////
+    public function check_user_social(){
+        return $this->bll->check_user_social();
+    }
+
+    public function insert_user_social(){
+        return $this->bll->insert_user_social();
+    }
+    /////////////
+    //////////////
+
     public function active_user(){
         $this->bll->active_user();
     }
@@ -39,44 +52,4 @@ class login_model {
         $this->bll->update_pass();
     }
 
-
-    // public function data_social($arrArgument){
-    //     return $this->bll->data_social_BLL($arrArgument);
-    // }
-    // public function rid_social($arrArgument){
-    //     return $this->bll->rid_social_BLL($arrArgument);
-    // }
-    // public function exist_user($arrArgument){
-    //     return $this->bll->exist_user_BLL($arrArgument);
-    // }
-    // public function type_user($arrArgument){
-    //     return $this->bll->type_user_BLL($arrArgument);
-    // }
-    // public function print_user($arrArgument){
-    //     return $this->bll->print_user_BLL($arrArgument);
-    // }
-    // public function update_user($arrArgument){
-    //     return $this->bll->update_user_BLL($arrArgument);
-    // }
-    // public function get_mail_to($arrArgument){
-    //     return $this->bll->get_mail_to_BLL($arrArgument);
-    // }
-    // public function update_passwd($arrArgument){
-    //     return $this->bll->update_passwd_BLL($arrArgument);
-    // }
-    // public function modify_avatar($arrArgument){
-    //     return $this->bll->modify_avatar_BLL($arrArgument);
-    // }
-    // public function print_dog($arrArgument){
-    //     return $this->bll->print_dog_BLL($arrArgument);
-    // }
-    // public function print_adoption($arrArgument){
-    //     return $this->bll->print_adoption_BLL($arrArgument);
-    // }
-    // public function conceal_dog($arrArgument){
-    //     return $this->bll->conceal_dog_BLL($arrArgument);
-    // }
-    // public function visible_dog($arrArgument){
-    //     return $this->bll->visible_dog_BLL($arrArgument);
-    // }
 }

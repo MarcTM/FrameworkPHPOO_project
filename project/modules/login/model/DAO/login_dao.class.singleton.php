@@ -32,6 +32,29 @@
             return $token;
         }
 
+        ////////////
+		// GOOGLE AND GITHUB
+		//////////////////////
+        public function check_user_social($db, $id) {
+            $sql = "SELECT * FROM users WHERE IDuser = '$id'";
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+        public function insert_user_social($db, $data) {
+            $iduser = $data['iduser'];
+            $user = $data['user'];
+            $email = $data['email'];
+            $token = md5(uniqid(rand(),true));
+            $avatar = $data['avatar'];;
+
+            $sql = "INSERT INTO users(IDuser,user,email,password,type,avatar,activate,token) VALUES('$iduser','$user','$email','','user','$avatar',1,'$token')";
+            $db->ejecutar($sql);
+            return $token;
+        }
+        //////////////////
+        //////////////////
+
         public function active_user($db, $param) {
             $sql = "UPDATE users SET activate = 1 WHERE token = '$param' AND activate = 0";
             $db->ejecutar($sql);
@@ -83,92 +106,4 @@
             $stmt = $db->ejecutar($sql);
         }
         
-
-
-        // public function insert_data_social($db,$arrArgument) {
-        //     $id_user = $arrArgument['id_user'];
-        //     $user = $arrArgument['user'];
-        //     $email = $arrArgument['email'];
-        //     $avatar = $arrArgument['avatar'];
-        //     $token = md5(uniqid(rand(),true));
-        //     $sql = "INSERT INTO users(IDuser,user,email,password,type,avatar,activate,token,name,surname,birthday) VALUES('$id_user','$user','$email','','user','$avatar',1,'$token', '', '', '')";
-        //     return $db->ejecutar($sql);
-        // }
-        
-
-        // public function select_rid_social($db,$arrArgument) {
-        //     $sql = "SELECT IDuser FROM users WHERE IDuser = '$arrArgument'";
-        //     $stmt = $db->ejecutar($sql);
-        //     return $db->listar($stmt);
-        // }
-
-        // public function select_exist_user($db,$arrArgument) {
-        //     $sql = "SELECT password,activate,token FROM users WHERE IDuser = '$arrArgument'";
-        //     $stmt = $db->ejecutar($sql);
-        //     return $db->listar($stmt);
-        // }
-
-        // public function select_type_user($db,$arrArgument) {
-        //     $sql = "SELECT type FROM users WHERE token = '$arrArgument'";
-        //     $stmt = $db->ejecutar($sql);
-        //     return $db->listar($stmt);
-        // }
-
-        // public function select_print_user($db,$arrArgument) {
-        //     $sql = "SELECT IDuser,user,email,avatar,name,surname,birthday FROM users WHERE token = '$arrArgument'";
-        //     $stmt = $db->ejecutar($sql);
-        //     return $db->listar($stmt);
-        // }
-
-        // public function select_update_user($db,$arrArgument) {
-        //     $user = $arrArgument['user'];
-        //     $pname = $arrArgument['pname'];
-        //     $psurname = $arrArgument['psurname'];
-        //     $pbirthday = $arrArgument['pbirthday'];
-        //     $sql = "UPDATE users SET name = '$pname',surname = '$psurname',birthday = '$pbirthday' WHERE IDuser = '$user'";
-        //     return $db->ejecutar($sql);
-        // }
-
-        // public function select_get_mail_to($db,$arrArgument) {
-        //     $sql = "SELECT email,token FROM users WHERE IDuser = '$arrArgument'";
-        //     $stmt = $db->ejecutar($sql);
-        //     return $db->listar($stmt);
-        // }
-
-        // public function update_passwd($db,$arrArgument) {
-        //     $pass = crypt($arrArgument['recpass'], '$1$rasmusle$');
-        //     $token = $arrArgument['token'];
-        //     $sql = "UPDATE users SET password = '$pass' WHERE token = '$token'";
-        //     return $db->ejecutar($sql);
-        // }
-
-        // public function update_avatar($db,$arrArgument) {
-        //     $url = $arrArgument['data'];
-        //     $user = $arrArgument['user'];
-        //     $sql = "UPDATE users SET avatar = '$url' WHERE IDuser = '$user'";
-        //     return $db->ejecutar($sql);
-        // }
-
-        // public function select_dog($db,$arrArgument) {
-        //     $sql = "SELECT name,chip,breed,sex,stature,picture,date_birth,state FROM `dogs` WHERE owner = '$arrArgument' OR chip = '$arrArgument'";
-        //     $stmt = $db->ejecutar($sql);
-        //     return $db->listar($stmt);
-        // }
-
-        // public function select_adoption($db,$arrArgument) {
-        //     $sql = "SELECT dog FROM `adoption` WHERE user = '$arrArgument'";
-        //     $stmt = $db->ejecutar($sql);
-        //     return $db->listar($stmt);
-        // }
-
-        // public function conceal_dog($db,$arrArgument) {
-        //     $sql = "UPDATE dogs SET state = 2 WHERE chip = '$arrArgument'";
-        //     return $db->ejecutar($sql);
-        // }
-        
-        // public function visible_dog($db,$arrArgument) {
-        //     $sql = "UPDATE dogs SET state = 0 WHERE chip = '$arrArgument'";
-        //     return $db->ejecutar($sql);
-        // }
-
     }

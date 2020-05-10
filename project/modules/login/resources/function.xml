@@ -37,6 +37,14 @@
         <uri>insert_user</uri>
     </function>
     <function>
+        <name>check_user_social</name>
+        <uri>check_user_social</uri>
+    </function>
+    <function>
+        <name>insert_user_social</name>
+        <uri>insert_user_social</uri>
+    </function>
+    <function>
         <name>active_user</name>
         <uri>active_user</uri>
     </function>

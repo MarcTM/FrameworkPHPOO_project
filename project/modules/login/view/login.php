@@ -31,7 +31,7 @@
                 <td><input type="button" name="log_in" id="log_in" value="LOG IN" onclick="validate_login()"/> </td>
             </tr>
             <tr>
-                <td><input type="button" name="log_in_google" id="log_in_googl" value="GOOGLE""/> </td>
+                <td><input type="button" name="log_in_google" id="log_in_google" value="GOOGLE""/> </td>
             </tr><tr>
                 <td><input type="button" name="log_in_github" id="log_in_github" value="GITHUB""/> </td>
             </tr>
