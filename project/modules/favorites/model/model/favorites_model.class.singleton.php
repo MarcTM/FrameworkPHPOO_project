@@ -18,4 +18,12 @@ class favorites_model {
     public function checkfav(){
         return $this->bll->checkfav();
     }
+
+    public function addfav(){
+        return $this->bll->addfav();
+    }
+
+    public function delfav(){
+        return $this->bll->delfav();
+    }
 }

@@ -14,11 +14,34 @@ class favorites_dao {
     }
 
 
-    public function check_fav($db) {
-        $email = $_SESSION['email'];
+    public function check_fav($db, $token) {
+        $sql = "SELECT email FROM users WHERE token = '$token'";
+        $stmt = $db->ejecutar($sql);
+        $result = $db->listar_arr($stmt);
+        $email = $result[0]['email'];        
 
         $sql = "SELECT DISTINCT prod FROM favorites WHERE email = '$email'";
         $stmt = $db->ejecutar($sql);
         return $db->listar_arr($stmt);
+    }
+
+    public function add_fav($db, $id, $token) {
+        $sql = "SELECT email FROM users WHERE token = '$token'";
+        $stmt = $db->ejecutar($sql);
+        $result = $db->listar_arr($stmt);
+        $email = $result[0]['email'];
+        
+        $sql = "INSERT INTO favorites VALUES ('$email','$id')";
+        $db->ejecutar($sql);
+    }
+
+    public function del_fav($db, $id, $token) {
+        $sql = "SELECT email FROM users WHERE token = '$token'";
+        $stmt = $db->ejecutar($sql);
+        $result = $db->listar_arr($stmt);
+        $email = $result[0]['email'];
+
+        $sql = "DELETE FROM favorites WHERE email = '$email' AND prod = '$id'";
+        $db->ejecutar($sql);
     }
 }

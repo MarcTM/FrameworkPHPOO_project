@@ -5,18 +5,8 @@
 		}
 
 
-		function check_session(){
-			if ($_SESSION['user']){
-                echo "yes";
-                exit();
-            }else{
-                echo "no";
-                exit();
-            }
-		}
-
 		function list_login(){
-			require_once(VIEW_PATH_INC . "top/top_page_home.html");
+			require_once(VIEW_PATH_INC . "top/top_page_home.php");
         	require_once(VIEW_PATH_INC . "menu.php");
         	loadView('modules/login/view/', 'login.php');
 			require_once(VIEW_PATH_INC . "footer.html");
@@ -24,7 +14,7 @@
 		}
 
 		function list_register(){
-			require_once(VIEW_PATH_INC . "top/top_page_home.html");
+			require_once(VIEW_PATH_INC . "top/top_page_home.php");
         	require_once(VIEW_PATH_INC . "menu.php");
         	loadView('modules/login/view/', 'register.php');
 			require_once(VIEW_PATH_INC . "footer.html");
@@ -32,7 +22,7 @@
 		}
 
 		function recover_pass(){
-			require_once(VIEW_PATH_INC . "top/top_page_home.html");
+			require_once(VIEW_PATH_INC . "top/top_page_home.php");
         	require_once(VIEW_PATH_INC . "menu.php");
         	loadView('modules/login/view/', 'recover.php');
 			require_once(VIEW_PATH_INC . "footer.html");

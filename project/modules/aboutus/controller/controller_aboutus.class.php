@@ -5,7 +5,7 @@
 	    }
 
 	    function list_aboutus() {
-	    	require_once(VIEW_PATH_INC . "top/top_page.html");
+	    	require_once(VIEW_PATH_INC . "top/top_page.php");
         	require_once(VIEW_PATH_INC . "menu.php");
         	loadView('modules/aboutus/view/', 'aboutus.html');
 			require_once(VIEW_PATH_INC . "footer.html");

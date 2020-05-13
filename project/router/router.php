@@ -50,8 +50,8 @@ function handlerModule($URI_module, $URI_function) {
                 $obj = new $controllerClass;
             } else {
                 //die($URI_module . ' - Controlador no encontrado');
-                require_once(VIEW_PATH_INC . "top/top_page_home.html");
-                require_once(VIEW_PATH_INC . "menu/menu_default.html");
+                require_once(VIEW_PATH_INC . "top/top_page_home.php");
+                require_once(VIEW_PATH_INC . "menu.php");
                 require_once(VIEW_PATH_INC . "404.php");
                 require_once(VIEW_PATH_INC . "footer.html");
                 require_once(VIEW_PATH_INC . "bottom_page.html");
@@ -61,8 +61,8 @@ function handlerModule($URI_module, $URI_function) {
         }
     }
     if (!$exist) {
-        require_once(VIEW_PATH_INC . "top/top_page_home.html");
-        require_once(VIEW_PATH_INC . "menu/menu_admin.html");
+        require_once(VIEW_PATH_INC . "top/top_page_home.php");
+        require_once(VIEW_PATH_INC . "menu.php");
         require_once(VIEW_PATH_INC . "404.html");
         require_once(VIEW_PATH_INC . "footer.html");
         require_once(VIEW_PATH_INC . "bottom_page.html");
@@ -82,8 +82,8 @@ function handlerfunction($module, $obj, $URI_function) {
     }
 
     if (!$exist) {
-        require_once(VIEW_PATH_INC . "top/top_page_home.html");
-        require_once(VIEW_PATH_INC . "menu/menu_default.html");
+        require_once(VIEW_PATH_INC . "top/top_page_home.php");
+        require_once(VIEW_PATH_INC . "menu.php");
         require_once(VIEW_PATH_INC . "404.html");
         require_once(VIEW_PATH_INC . "footer.html");
         require_once(VIEW_PATH_INC . "bottom_page.html");

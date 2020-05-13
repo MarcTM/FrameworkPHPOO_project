@@ -8,4 +8,12 @@
         <name>checkfav</name>
         <uri>checkfav</uri>
     </function>
+    <function>
+        <name>addfav</name>
+        <uri>addfav</uri>
+    </function>
+    <function>
+        <name>delfav</name>
+        <uri>delfav</uri>
+    </function>
 </functions>

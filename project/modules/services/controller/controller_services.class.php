@@ -5,7 +5,7 @@
 	    }
 
 	    function list_services() {
-	    	require_once(VIEW_PATH_INC . "top/top_page.html");
+	    	require_once(VIEW_PATH_INC . "top/top_page.php");
         	require_once(VIEW_PATH_INC . "menu.php");
         	loadView('modules/services/view/', 'services.html');
 			require_once(VIEW_PATH_INC . "footer.html");

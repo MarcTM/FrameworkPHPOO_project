@@ -1,44 +1,24 @@
 // Promise used in shop.js
-var checksession = function() {
-    return new Promise(function(resolve) {
-        $.ajax({ 
-                type: 'GET', 
-                url: "?module=login&function=check_session", 
-            })
-            .done(function( session, textStatus, jqXHR ) {
-                resolve(session);
-            })
-    });
-}
-
-
-// Promise used in shop.js
 var favuser = function() {
     return new Promise(function(resolve) {
         $.ajax({ 
-                type: 'GET', 
-                url: "?module=favorites&function=checkfav",
-                dataType: "JSON", 
-            })
-            .done(function(data2, textStatus, jqXHR) {
-                resolve(data2);
-            })
-    });
-}
-
-
-var hearth = function() {
-    return new Promise(function(resolve) {
-        $.ajax({
-            type: "GET",
-            url: "?module=favorites&function=checkuser"
+            type: 'POST', 
+            url: "?module=favorites&function=checkfav",
+            dataType: "JSON",
+            data: {'token':localStorage.getItem('id_token')}
         })
-          .done(function( data, textStatus, jqXHR ) {
-              resolve(data);
-          })
+        .done(function(data, textStatus, jqXHR) {
+            resolve(data);
+        })
     });
 }
 
+
+
+
+///////////////
+/// ADD TO FAVORITES(CLICK)
+///////////////////
 function tofav(){
     $('body').on("click", ".favorites", function() {
         var id = this.getAttribute('id');
@@ -50,28 +30,27 @@ function tofav(){
             $(this).attr("src", "view/assets/img/favorites/corazonblanco.png");
         }
 
-    
-        hearth()
-        .then(function(data) {
-            if(data==="yes"){
-                if(estado==="view/assets/img/favorites/corazonblanco.png"){
-                    $.ajax({
-                        type: "GET",
-                        url: "module/favorites/controller/controller_favorites.php?op=addfav&id=" + id
-                    })
-                }else{
-                    $.ajax({
-                        type: "GET",
-                        url: "module/favorites/controller/controller_favorites.php?op=delfav&id=" + id
-                    })
-                }
+
+        if(localStorage.getItem('id_token')){
+            if(estado==="view/assets/img/favorites/corazonblanco.png"){
+                $.ajax({
+                    type: "POST",
+                    url: "?module=favorites&function=addfav",
+                    data: {'id':id, 'token':localStorage.getItem('id_token')}
+                })
             }else{
-                toastr["error"]("You must be registered to add to favorites", "LOG IN");
-                setTimeout(function() {
-                    window.location.href = "?module=login&function=list_login"
-                }, 4000);
+                $.ajax({
+                    type: "POST",
+                    url: "?module=favorites&function=delfav",
+                    data: {'id':id, 'token':localStorage.getItem('id_token')}
+                })
             }
-         })
+        }else{
+            toastr["error"]("You must be loged to add to favorites", "LOG IN");
+            setTimeout(function() {
+                window.location.href = "?module=login&function=list_login"
+            }, 2000);
+        }
     })
 }
 

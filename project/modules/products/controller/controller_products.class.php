@@ -5,7 +5,7 @@
 	    }
 
 	    function list_product() {
-	    	require_once(VIEW_PATH_INC . "top/top_page_products.html");
+	    	require_once(VIEW_PATH_INC . "top/top_page_products.php");
         	require_once(VIEW_PATH_INC . "menu.php");
         	loadView('modules/products/view/', 'list_products.html');
 			require_once(VIEW_PATH_INC . "footer.html");

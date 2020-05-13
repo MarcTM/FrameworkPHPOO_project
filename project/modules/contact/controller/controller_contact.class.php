@@ -5,7 +5,7 @@
 	    }
 
 	    function list_contact() {
-	    	require_once(VIEW_PATH_INC . "top/top_page_contact.html");
+	    	require_once(VIEW_PATH_INC . "top/top_page_contact.php");
         	require_once(VIEW_PATH_INC . "menu.php");
         	loadView('modules/contact/view/', 'contact.html');
 			require_once(VIEW_PATH_INC . "footer.html");
