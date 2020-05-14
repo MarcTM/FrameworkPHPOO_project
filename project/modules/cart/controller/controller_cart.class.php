@@ -12,15 +12,6 @@
 			require_once(VIEW_PATH_INC . "bottom_page.html");
 		}
 		
-		function logincart(){
-			if($_SESSION['type']){
-				echo "true";
-				exit;
-			}else{
-				echo "false";
-				exit;
-			}
-		}
 
 		function showcart(){
 			$json = loadModel(MODEL_CART, "cart_model", "showcart");
@@ -32,9 +23,13 @@
 			echo json_encode($json);
 		}
 
-		function localdb(){
-			$json = loadModel(MODEL_CART, "cart_model", "localdb");
+		function addproduct(){
+			$json = loadModel(MODEL_CART, "cart_model", "addproduct");
 			echo json_encode($json);
+		}
+
+		function localdb(){
+			loadModel(MODEL_CART, "cart_model", "localdb");
 		}
 
 		function delete(){

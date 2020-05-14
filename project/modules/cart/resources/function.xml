@@ -17,6 +17,10 @@
         <uri>showlocalcart</uri>
     </function>
     <function>
+        <name>addproduct</name>
+        <uri>addproduct</uri>
+    </function>
+    <function>
         <name>localdb</name>
         <uri>localdb</uri>
     </function>

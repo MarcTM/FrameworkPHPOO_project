@@ -74,14 +74,13 @@ function sl_github(){
           authService.signInWithPopup(provider2)
           .then(function(result) {
             //   console.log(result.additionalUserInfo.username);
-            //   console.log(result.user.displayName);
             //   console.log(result.user.email);
             //   console.log(result.user.photoURL);
 
             $.ajax({
                 url: "?module=login&function=check_user_social",
                 type: "POST",
-                data: {'user':result.additionalUserInfo.username, 'avatar':result.user.photoURL, 'iduser':result.additionalUserInfo.username},
+                data: {'user':result.additionalUserInfo.username, 'email':result.user.email, 'avatar':result.user.photoURL, 'iduser':result.additionalUserInfo.username},
                 dataType: "JSON"
             })
             .done(function(user){

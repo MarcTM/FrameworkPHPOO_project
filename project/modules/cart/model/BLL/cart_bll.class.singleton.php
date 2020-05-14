@@ -17,34 +17,41 @@
 		}
 		
 		public function showcart(){
-			return $this->dao->show_prod($this->db);
+			return $this->dao->show_prod($this->db, $_POST['token']);
 		}
 
 		public function showlocalcart(){
 			return $this->dao->show_localprod($this->db, $_GET['id']);
 		}
 
-		public function localdb(){
-			$product = $this->dao->check_prod($this->db, $_GET['id']);
+		public function addproduct(){
+			$exists = $this->dao->check_prod($this->db, $_POST['id'], $_POST['token']);
 
-			if (!$product){
-				$this->dao->add_prod($this->db, $_GET['id']);
-				return ("not exists");
+			if($exists===false){
+				$this->dao->add_prod($this->db, $_POST['id'], $_POST['token']);			
 			}else{
-				return $product;
+				return "exists";
+			}
+		}
+
+		public function localdb(){
+			$product = $this->dao->check_prod($this->db, $_POST['id'], $_POST['token']);
+
+			if ($product===false){
+				$this->dao->add_prod($this->db, $_POST['id'], $_POST['token']);
 			}
 		}
 
 		public function delete(){
-			return $this->dao->delete($this->db, $_GET['id']);
+			return $this->dao->delete($this->db, $_POST['id'], $_POST['token']);
 		}
 
 		public function changequ(){
-			return $this->dao->changequ($this->db, $_GET['num'], $_GET['id']);
+			return $this->dao->changequ($this->db, $_POST['num'], $_POST['id'], $_POST['token']);
 		}
 
 		public function checkout(){
-			return $this->dao->checkout($this->db);
+			return $this->dao->checkout($this->db, $_POST['token']);
 		}
 
 

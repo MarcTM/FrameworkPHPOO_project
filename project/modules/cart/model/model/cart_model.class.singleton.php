@@ -22,8 +22,12 @@ class cart_model {
         return $this->bll->showlocalcart();
     }
 
+    public function addproduct(){
+        return $this->bll->addproduct();
+    }
+
     public function localdb(){
-        return $this->bll->localdb();
+        $this->bll->localdb();
     }
 
     public function delete(){
