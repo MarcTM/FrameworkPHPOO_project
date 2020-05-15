@@ -24,7 +24,8 @@
             $user = $data['user'];
             $email = $data['email'];
             $password = password_hash($data['pass'], PASSWORD_DEFAULT);
-            $token = md5(uniqid(rand(),true));
+            // $token = md5(uniqid(rand(),true));
+            $token = bin2hex(openssl_random_pseudo_bytes(20));
             $avatar = 'view/assets/img/avatars/default.jpg';
 
             $sql = "INSERT INTO users(IDuser,user,email,password,type,avatar,activate,token) VALUES('$user','$user','$email','$password','user','$avatar',0,'$token')";
@@ -45,7 +46,7 @@
             $iduser = $data['iduser'];
             $user = $data['user'];
             $email = $data['email'];
-            $token = md5(uniqid(rand(),true));
+            $token = encode_token($iduser);
             $avatar = $data['avatar'];;
 
             $sql = "INSERT INTO users(IDuser,user,email,password,type,avatar,activate,token) VALUES('$iduser','$user','$email','','user','$avatar',1,'$token')";
@@ -78,13 +79,13 @@
                 $stmt = $db->ejecutar($sql);
                 $result = $db->listar_arr($stmt);
 
-                if($result===false){
+                if($result[0]===null){
                     return "not activated";
                 }else{
                     if (password_verify($pass,$result[0]['password'])) {
                         $_SESSION['user'] = $result[0]['user'];
                         $_SESSION['avatar'] = $result[0]['avatar'];
-                        return $result[0]['token'];
+                        return encode_token($result[0]['IDuser']);
                     }else{
                         return "incorrect";
                     }
@@ -101,8 +102,9 @@
 
         public function update_pass($db, $token, $newpass) {
             $password = password_hash($newpass, PASSWORD_DEFAULT);
+            $newtoken = bin2hex(openssl_random_pseudo_bytes(20));
             
-            $sql = "UPDATE users SET password = '$password' WHERE token = '$token'";
+            $sql = "UPDATE users SET password = '$password', token = '$newtoken' WHERE token = '$token'";
             $stmt = $db->ejecutar($sql);
         }
         

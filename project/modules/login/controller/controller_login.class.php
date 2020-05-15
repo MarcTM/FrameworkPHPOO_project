@@ -35,7 +35,7 @@
 
 			if($result['token']){
 				$mail = send_mail_recover($result);
-				echo json_encode($mail);
+				echo json_encode("si");
 			}else{
 				echo json_encode("no");
 			}
@@ -46,7 +46,7 @@
 				$_SESSION['token'] = $_GET['param'];
 			}
 
-			require_once(VIEW_PATH_INC . "top/top_page_home.html");
+			require_once(VIEW_PATH_INC . "top/top_page_home.php");
         	require_once(VIEW_PATH_INC . "menu.php");
         	loadView('modules/login/view/', 'new_pass.php');
 			require_once(VIEW_PATH_INC . "footer.html");
@@ -56,7 +56,6 @@
 		function update_pass(){
 			loadModel(MODEL_LOGIN, "login_model", "update_pass");
 			unset($_SESSION['token']);
-			echo "completed";
 		}
 
 		function check_register(){

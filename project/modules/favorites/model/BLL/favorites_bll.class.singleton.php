@@ -18,14 +18,17 @@
 
 
 		public function checkfav(){
-			return $this->dao->check_fav($this->db, $_POST['token']);
+			$decodetoken = json_decode(decode_token($_POST['token']))->name;
+			return $this->dao->check_fav($this->db, $decodetoken);
 		}
 
 		public function addfav(){
-			return $this->dao->add_fav($this->db, $_POST['id'], $_POST['token']);
+			$decodetoken = json_decode(decode_token($_POST['token']))->name;
+			return $this->dao->add_fav($this->db, $_POST['id'], $decodetoken);
 		}
 
 		public function delfav(){
-			return $this->dao->del_fav($this->db, $_POST['id'], $_POST['token']);
+			$decodetoken = json_decode(decode_token($_POST['token']))->name;
+			return $this->dao->del_fav($this->db, $_POST['id'], $decodetoken);
 		}
 	}

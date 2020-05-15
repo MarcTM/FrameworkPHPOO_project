@@ -14,8 +14,8 @@ class favorites_dao {
     }
 
 
-    public function check_fav($db, $token) {
-        $sql = "SELECT email FROM users WHERE token = '$token'";
+    public function check_fav($db, $decodetoken) {
+        $sql = "SELECT email FROM users WHERE IDuser = '$decodetoken'";
         $stmt = $db->ejecutar($sql);
         $result = $db->listar_arr($stmt);
         $email = $result[0]['email'];        
@@ -25,8 +25,8 @@ class favorites_dao {
         return $db->listar_arr($stmt);
     }
 
-    public function add_fav($db, $id, $token) {
-        $sql = "SELECT email FROM users WHERE token = '$token'";
+    public function add_fav($db, $id, $decodetoken) {
+        $sql = "SELECT email FROM users WHERE IDuser = '$decodetoken'";
         $stmt = $db->ejecutar($sql);
         $result = $db->listar_arr($stmt);
         $email = $result[0]['email'];
@@ -35,8 +35,8 @@ class favorites_dao {
         $db->ejecutar($sql);
     }
 
-    public function del_fav($db, $id, $token) {
-        $sql = "SELECT email FROM users WHERE token = '$token'";
+    public function del_fav($db, $id, $decodetoken) {
+        $sql = "SELECT email FROM users WHERE IDuser = '$decodetoken'";
         $stmt = $db->ejecutar($sql);
         $result = $db->listar_arr($stmt);
         $email = $result[0]['email'];

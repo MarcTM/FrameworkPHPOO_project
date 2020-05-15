@@ -75,7 +75,8 @@ function validate_login(){
             toastr["error"]("Your email or password is incorrect", "INCORRECT CREDENTIALS");
         }else{
             localStorage.setItem('id_token', cred);
-            setTimeout(function(){ window.location.href = "?module=home&function=list_home" }, 2000);
+            toastr["success"]("You have successfully loged in", "LOGGIN IN");
+            setTimeout(function(){ window.location.href = "?module=home&function=list_home" }, 1500);
         }
     })
 }
@@ -132,9 +133,8 @@ function validate_register(){
                 url: "?module=login&function=insert_user",
                 type: "POST",
                 data: {data:JSON.stringify(data)},
-                dataType: "JSON"
             })
-
+            
             toastr["info"]("You have received an email, go and activate your account", "CHECK YOUR EMAIL");
             setTimeout(function() {
                 window.location.href = "?module=login&function=list_login"
@@ -194,10 +194,10 @@ function recover_pass(){
             dataType: "JSON"
         })
         .done(function(data){
-            if(data===false){
-                alert("Not registered");
+            if(data==="no"){
+                toastr["error"]("This mail is not registered", "ERROR");
             }else{
-                alert("Check your email");
+                toastr["info"]("Check your email to update your password", "CHECK YOUR EMAIL");
             }
         })
     });
@@ -226,9 +226,11 @@ function new_pass(){
             type: "POST",
             data: {'pass':$("#passn").val()},
         })
-        .done(function(data){
-            alert("Password changed");
-            setTimeout('window.location.href = "?module=login&function=list_login", 3000');
+        .done(function(){
+            toastr["success"]("New password changed", "PASSWORD CHANGED");
+            setTimeout(function() {
+                window.location.href = "?module=login&function=list_login"
+            }, 2000);
         })
     });
 }

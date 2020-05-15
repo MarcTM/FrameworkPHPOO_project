@@ -14,8 +14,8 @@ class cart_dao {
     }
 
 
-    public function show_prod($db, $token) {
-        $sql = "SELECT email FROM users WHERE token = '$token'";
+    public function show_prod($db, $decodetoken) {
+        $sql = "SELECT email FROM users WHERE IDuser = '$decodetoken'";
         $stmt = $db->ejecutar($sql);
         $result = $db->listar_arr($stmt);
         $email = $result[0]['email'];
@@ -31,8 +31,9 @@ class cart_dao {
         return $db->listar($stmt);
     }
 
-    public function check_prod($db, $id, $token) {
-        $sql = "SELECT email FROM users WHERE token = '$token'";
+    public function check_prod($db, $id, $decodetoken) {
+        $sql = "SELECT email FROM users WHERE IDuser = '$decodetoken'";
+
         $stmt = $db->ejecutar($sql);
         $result = $db->listar_arr($stmt);
         $email = $result[0]['email'];
@@ -42,8 +43,9 @@ class cart_dao {
         return $db->listar($stmt);
     }
 
-    public function add_prod($db, $id, $token) {
-        $sql = "SELECT email FROM users WHERE token = '$token'";
+    public function add_prod($db, $id, $decodetoken) {
+        $sql = "SELECT email FROM users WHERE IDuser = '$decodetoken'";
+
         $stmt = $db->ejecutar($sql);
         $result = $db->listar_arr($stmt);
         $email = $result[0]['email'];
@@ -52,8 +54,8 @@ class cart_dao {
         $db->ejecutar($sql);
     }
 
-    public function delete($db, $id, $token) {
-        $sql = "SELECT email FROM users WHERE token = '$token'";
+    public function delete($db, $id, $decodetoken) {
+        $sql = "SELECT email FROM users WHERE IDuser = '$decodetoken'";
         $stmt = $db->ejecutar($sql);
         $result = $db->listar_arr($stmt);
         $email = $result[0]['email'];
@@ -62,8 +64,8 @@ class cart_dao {
         $db->ejecutar($sql);
     }
 
-    public function changequ($db, $num, $id, $token) {
-        $sql = "SELECT email FROM users WHERE token = '$token'";
+    public function changequ($db, $num, $id, $decodetoken) {
+        $sql = "SELECT email FROM users WHERE IDuser = '$decodetoken'";
         $stmt = $db->ejecutar($sql);
         $result = $db->listar_arr($stmt);
         $email = $result[0]['email'];
@@ -72,8 +74,8 @@ class cart_dao {
         $db->ejecutar($sql);
     }
 
-    public function checkout($db, $token) {
-        $sql = "SELECT email FROM users WHERE token = '$token'";
+    public function checkout($db, $decodetoken) {
+        $sql = "SELECT email FROM users WHERE IDuser = '$decodetoken'";
         $stmt = $db->ejecutar($sql);
         $result = $db->listar_arr($stmt);
         $email = $result[0]['email'];

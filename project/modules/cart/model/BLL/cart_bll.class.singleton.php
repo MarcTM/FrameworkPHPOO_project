@@ -17,7 +17,8 @@
 		}
 		
 		public function showcart(){
-			return $this->dao->show_prod($this->db, $_POST['token']);
+			$decodetoken = json_decode(decode_token($_POST['token']))->name;
+			return $this->dao->show_prod($this->db, $decodetoken);
 		}
 
 		public function showlocalcart(){
@@ -25,10 +26,11 @@
 		}
 
 		public function addproduct(){
-			$exists = $this->dao->check_prod($this->db, $_POST['id'], $_POST['token']);
+			$decodetoken = json_decode(decode_token($_POST['token']))->name;
+			$exists = $this->dao->check_prod($this->db, $_POST['id'], $decodetoken);
 
 			if($exists===false){
-				$this->dao->add_prod($this->db, $_POST['id'], $_POST['token']);			
+				$this->dao->add_prod($this->db, $_POST['id'], $decodetoken);			
 			}else{
 				return "exists";
 			}
@@ -43,15 +45,18 @@
 		}
 
 		public function delete(){
-			return $this->dao->delete($this->db, $_POST['id'], $_POST['token']);
+			$decodetoken = json_decode(decode_token($_POST['token']))->name;
+			return $this->dao->delete($this->db, $_POST['id'], $decodetoken);
 		}
 
 		public function changequ(){
-			return $this->dao->changequ($this->db, $_POST['num'], $_POST['id'], $_POST['token']);
+			$decodetoken = json_decode(decode_token($_POST['token']))->name;
+			return $this->dao->changequ($this->db, $_POST['num'], $_POST['id'], $decodetoken);
 		}
 
 		public function checkout(){
-			return $this->dao->checkout($this->db, $_POST['token']);
+			$decodetoken = json_decode(decode_token($_POST['token']))->name;
+			return $this->dao->checkout($this->db, $decodetoken);
 		}
 
 

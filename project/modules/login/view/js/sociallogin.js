@@ -47,7 +47,7 @@ function sl_google(){
                         localStorage.setItem('id_token', data);
                         setTimeout('window.location.href = "?module=home&function=list_home", 3000');
                     })
-                    .catch(function(error) {
+                    .catch(function() {
                         toastr["error"]("An error was found while accessing your account", "ERROR");
                     });
                 }else{
@@ -95,7 +95,7 @@ function sl_github(){
                         localStorage.setItem('id_token', data);
                         setTimeout('window.location.href = "?module=home&function=list_home", 3000');
                     })
-                    .catch(function(error) {
+                    .catch(function() {
                         toastr["error"]("An error was found while accessing your account", "ERROR");
                     });
                 }else{
@@ -103,8 +103,7 @@ function sl_github(){
                     setTimeout('window.location.href = "?module=home&function=list_home", 3000');
                 }
             })
-          }).catch(function(error) {
-                //   console.log(error);
+          }).catch(function() {
                 toastr["error"]("Couldn't acces your account", "ERROR");
           });
       })
