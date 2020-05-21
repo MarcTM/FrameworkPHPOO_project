@@ -71,6 +71,8 @@ function carousel() {
         dataType: "JSON",
     })
     .done(function(data) {
+        console.log(data);
+        console.log(data[1].url);
         var img = "";
         for (var i=0; i<data.length; i++ ){
             img += '<div id="s2"><img class="clickcar" id="'+data[i].id+'" src="'+data[i].url+'"></div>'
