@@ -1,8 +1,9 @@
 # MARC PROJECT 1DAW <br> PHP FRAMEWORK & JQUERY
 
 
-This is my PHP with JS/JQUERY project that I'm doing at this moment.
-It consists on a Supplements page, with a Homepage, Shop, Services, Meet Us, Contact, and Login (login, register, recover_password, cart, favorites).
+This is a project with a PHP Framework and Js/Jquery.
+It is based on a Supplements Page made by me, with a Homepage, Shop, Services, Meet Us, Contact, and Login (login, register, recover_password, cart, favorites).
+With this PHP Framework im working on controllers, models and views.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -20,7 +21,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Built With
 
-* PHP - Backend
+* PHP Framework - Backend
 * JavaScript - Frontend
 * JQuery - Frontend (JS Framework)
 
