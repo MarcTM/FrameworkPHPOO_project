@@ -2,8 +2,8 @@
 
 
 This is a project with a PHP Framework and Js/Jquery.
-It is based on a Supplements Page made by me, with a Homepage, Shop, Services, Meet Us, Contact, and Login (login, register, recover_password, cart, favorites).
-With this PHP Framework im working on controllers, models and views.
+It is based on a Supplements Page made by me, with a Homepage, Shop, Services, Meet Us, Contact, and Login (login, register, recover_password, cart, favorites). <br>
+With this PHP Framework I'm working with controllers, models and views.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -28,8 +28,3 @@ These instructions will get you a copy of the project up and running on your loc
 ## Authors
 
 * **Marc Torres** - *Developer of the webpage*
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
